@@ -18,5 +18,10 @@ class Config:
     EPOCHS_CLF = 5                 # Quick convergence expected
     
     # Hardware
-    DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
+    if torch.cuda.is_available():
+        DEVICE = "cuda"
+    elif torch.backends.mps.is_available():
+        DEVICE = "mps"
+    else:
+        DEVICE = "cpu"
     SEED = 42
