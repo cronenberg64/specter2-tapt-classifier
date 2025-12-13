@@ -12,7 +12,17 @@ class Config:
     # NEW: Experiment Control Knobs (Defaults)
     USE_TAPT_WEIGHTS = True       # True = use ./models/specter_tapt, False = use allenai/specter2_base
     UNFREEZE_LAST_N_LAYERS = 0    # 0 = Freeze all. 2 = Unfreeze top 2. 12 = Unfreeze all.
-    DATA_FRACTION = 1.0           # 1.0 = 100% data. 0.1 = 10% data.
+    DATA_FRACTION = 0.2           # Reduced to 20% for CPU speed test
+    
+    # PHASE 4: THE GRANDMASTER
+    PHASE4_DIR = "./models/phase4_shootout"
+    MODEL_CANDIDATES = [
+        "roberta-large",                    # The "Accuracy King" (Replaces DeBERTa due to Windows SP issues)
+        "allenai/scibert_scivocab_uncased", # The "Domain Expert"
+        "google-bert/bert-base-uncased"     # The Baseline (to re-confirm)
+    ]
+    EPOCHS_SHOOTOUT = 1      # Reduced for CPU speed
+    LEARNING_RATE = 2e-5
     
     # Training Hyperparameters
     MAX_LENGTH = 512
