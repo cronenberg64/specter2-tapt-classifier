@@ -1,0 +1,14 @@
+{
+    "SetFit": {
+        "skipped": true
+    },
+    "Full_FineTune": {
+        "eval_loss": 0.09143273532390594,
+        "eval_accuracy": 0.9759615384615384,
+        "eval_f1": 0.9759615384615384,
+        "eval_runtime": 2.0353,
+        "eval_samples_per_second": 102.197,
+        "eval_steps_per_second": 12.775,
+        "epoch": 5.0
+    }
+}

@@ -1,3 +1,6 @@
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from src.collect_data import fetch_and_save_data
 from src.tapt_training import run_tapt
 from src.classifier_training import run_training
