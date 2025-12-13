@@ -97,5 +97,46 @@ def evaluate_all_models():
         
     print("Evaluation Complete. Results saved to 'results/' directory.")
 
+
+def evaluate_model(model_path=None):
+    if model_path is None:
+        model_path = Config.FINAL_MODEL_DIR
+    
+    model_name = os.path.basename(model_path)
+    print(f"Evaluating experiment model: {model_name} from {model_path}...")
+    
+    # Load Data
+    df = pd.read_csv(Config.DATA_PATH)
+    label_list = df['label'].unique().tolist()
+    label2id = {l: i for i, l in enumerate(label_list)}
+    df['labels'] = df['label'].map(label2id)
+    
+    sss = StratifiedShuffleSplit(n_splits=1, test_size=0.2, random_state=Config.SEED)
+    for train_index, val_index in sss.split(df, df['labels']):
+        val_df = df.iloc[val_index]
+    val_dataset = Dataset.from_pandas(val_df)
+    
+    # Load Model
+    tokenizer = AutoTokenizer.from_pretrained(model_path)
+    model = AutoModelForSequenceClassification.from_pretrained(model_path)
+    
+    def tokenize(batch):
+        return tokenizer(batch['text'], padding='max_length', truncation=True, max_length=Config.MAX_LENGTH)
+        
+    cols_to_remove = [c for c in val_dataset.column_names if c != 'labels']
+    tokenized_val = val_dataset.map(tokenize, batched=True, remove_columns=cols_to_remove)
+    
+    trainer = Trainer(model=model)
+    preds_output = trainer.predict(tokenized_val)
+    preds = preds_output.predictions.argmax(-1)
+    labels = preds_output.label_ids
+    
+    acc = accuracy_score(labels, preds)
+    f1 = f1_score(labels, preds, average='weighted')
+    
+    print(f"  Result - Accuracy: {acc:.4f}, F1: {f1:.4f}")
+    
+    return {"accuracy": acc, "f1": f1}
+
 if __name__ == "__main__":
     evaluate_all_models()

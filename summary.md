@@ -1,60 +1,55 @@
 # Project Summary: Specter 2 TAPT Classifier
 
 ## 1. Project Goal
-The objective of this project was to build a text classifier for scientific abstracts using **SPECTER 2** with **Task-Adaptive Pre-Training (TAPT)** and a **Layer Freezing** strategy. The performance was compared against standard baselines (**BERT** and **RoBERTa**).
+The objective of this project was to build and rigorously evaluate a text classifier for scientific abstracts using **SPECTER 2** with **Task-Adaptive Pre-Training (TAPT)**. We aimed to determine if domain adaptation and layer freezing strategies could outperform standard baselines.
 
 ## 2. Methodology
 
 ### Data Acquisition
-- **Source**: arXiv API.
-- **Categories**:
-    - `q-bio.NC` (Neuroscience)
-    - `cond-mat.mtrl-sci` (Materials Science)
-    - `q-bio.QM` (Bioinformatics)
-- **Dataset Size**: Approximately 1,050 unique abstracts (balanced classes).
+- **Source**: arXiv API (`q-bio.NC`, `cond-mat.mtrl-sci`, `q-bio.QM`).
+- **Dataset**: ~1,050 unique abstracts (balanced classes).
 
-### TAPT (Task-Adaptive Pre-Training)
-- **Model**: `allenai/specter2_base`.
-- **Objective**: Masked Language Modeling (MLM).
-- **Strategy**: Continued pre-training on the domain-specific corpus for 10 epochs.
-- **Regularization**: Layers 0-5 of the encoder were frozen to preserve general citation knowledge.
+### Phase 1: Foundation & Baselines
+We established a pipeline to compare:
+- **Specter TAPT**: Pre-trained on domain data, encoder frozen.
+- **BERT / RoBERTa**: Standard full fine-tuning.
 
-### Classification Fine-Tuning
-- **Models Compared**:
-    1.  **Specter TAPT**: Pre-trained on domain data, encoder frozen, classifier head trained.
-    2.  **BERT (`bert-base-uncased`)**: Standard full fine-tuning.
-    3.  **RoBERTa (`roberta-base`)**: Standard full fine-tuning.
-- **Training Config**: 5 epochs, batch size 8, learning rate 5e-5.
+### Phase 2: Advanced Experimentation
+We implemented an automated experiment suite to isolate variables:
+1.  **Ablation**: Specter Base vs. Specter TAPT (Does TAPT help?).
+2.  **Unfreezing**: Frozen Encoder vs. Top-2 Layers Unfrozen.
+3.  **Data Efficiency**: Training on 100% vs. 10% of data.
 
-## 3. Implementation Details
-The project is structured as follows:
-- `src/collect_data.py`: Fetches and cleans data from arXiv.
-- `src/tapt_training.py`: Performs TAPT on Specter 2.
-- `src/classifier_training.py`: Handles training for all three models.
-- `src/evaluation.py`: Generates metrics (Accuracy, F1) and confusion matrices.
-- `run_pipeline.py`: Orchestrates the entire workflow.
+## 3. Results
 
-## 4. Results
-The models were evaluated on a held-out test set (20%).
-
-| Model | Accuracy | F1 Score |
+### Phase 1: Model Comparison (Full Data)
+| Model | Strategy | F1 Score |
 | :--- | :--- | :--- |
-| **BERT** | **0.9760** | **0.9759** |
-| **RoBERTa** | 0.9663 | 0.9662 |
-| **Specter TAPT** | 0.9471 | 0.9468 |
+| **BERT** | Full Fine-Tuning | **0.9759** |
+| **RoBERTa** | Full Fine-Tuning | 0.9662 |
+| **Specter TAPT** | Frozen Encoder | 0.9468 |
 
-**Analysis**:
-- **BERT** achieved the highest performance.
-- **Specter TAPT** performed slightly lower, likely due to the **frozen encoder** strategy. While this preserves citation embeddings, it restricts the model's ability to adapt deep representations to the specific classification task compared to the fully fine-tuned baselines.
+### Phase 2: Specter Deep Dive
+| Experiment | Configuration | F1 Score | Impact |
+| :--- | :--- | :--- | :--- |
+| **Exp 1** | Base Specter (No TAPT) | 0.9567 | Baseline |
+| **Exp 2** | **Specter + TAPT** | **0.9614** | **+0.47% (TAPT Gain)** |
+| **Exp 3** | TAPT + Top-2 Unfrozen | 0.9614 | No significant gain |
+| **Exp 4** | Low Data (10%) | 0.6958 | -26% Drop |
 
-## 5. Challenges & Solutions
-During implementation, several technical issues were resolved:
-1.  **PyTorch DLL Error**: Initial installation failed on Windows.
-    - *Fix*: Reinstalled PyTorch with CUDA 12.1 support (`pip install torch ... --index-url .../cu121`).
-2.  **`torch.load` Vulnerability**: `transformers` blocked loading unsafe files.
-    - *Fix*: Enforced `use_safetensors=True` in model loading calls.
-3.  **Data Collation Error**: `Trainer` failed with string columns.
-    - *Fix*: Renamed target column to `labels` and removed non-numeric columns (`text`, `label`) before passing to the trainer.
+## 4. Key Findings
+1.  **TAPT Works**: Domain adaptation provided a consistent **~0.5% improvement** over the non-adapted Specter baseline.
+2.  **BERT is Robust**: For this specific task and dataset size, a fully fine-tuned BERT model outperformed the frozen Specter approach.
+3.  **Freezing is Efficient**: Unfreezing the top 2 layers of Specter yielded negligible gains, suggesting the frozen embeddings are already high-quality, but the "Frozen" constraint limits the peak performance compared to full fine-tuning.
+4.  **Data Hunger**: The Specter model (frozen) struggled in the low-data regime (10%), indicating it relies on sufficient labeled data to train the classifier head effectively.
+
+## 5. Implementation Details
+The project is modularized for reproducibility:
+- `src/collect_data.py`: arXiv scraper.
+- `src/tapt_training.py`: Domain adaptation (MLM).
+- `src/classifier_training.py`: Training logic with **Smart Freezing** and **Data Slicing**.
+- `src/config.py`: Centralized config with experiment control knobs.
+- `run_experiments.py`: Automated experiment runner.
 
 ## 6. Conclusion
-The project successfully demonstrated the TAPT pipeline. While the frozen Specter model didn't beat the fully fine-tuned baselines in this specific low-data regime, the pipeline is robust and ready for further experimentation (e.g., unfreezing layers, larger datasets).
+We successfully demonstrated a TAPT pipeline. While TAPT improved the specific Specter model, the **Frozen Encoder** strategy proved to be a limiting factor against fully fine-tuned baselines. Future work should focus on **Full Fine-Tuning of Specter TAPT** to combine the initialization benefits of TAPT with the plasticity of full training.

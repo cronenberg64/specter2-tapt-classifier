@@ -1,0 +1,50 @@
+[
+    {
+        "experiment": "Exp_1_Specter_Base_Frozen",
+        "accuracy": 0.9567307692307693,
+        "f1": 0.9566732161424052,
+        "config": {
+            "name": "Exp_1_Specter_Base_Frozen",
+            "use_tapt": false,
+            "unfreeze": 0,
+            "data": 1.0,
+            "note": "Baseline: Does Specter work without our innovation?"
+        }
+    },
+    {
+        "experiment": "Exp_2_Specter_TAPT_Frozen",
+        "accuracy": 0.9615384615384616,
+        "f1": 0.9613530702346758,
+        "config": {
+            "name": "Exp_2_Specter_TAPT_Frozen",
+            "use_tapt": true,
+            "unfreeze": 0,
+            "data": 1.0,
+            "note": "Our Current Best: Does TAPT help?"
+        }
+    },
+    {
+        "experiment": "Exp_3_Specter_TAPT_Top2",
+        "accuracy": 0.9615384615384616,
+        "f1": 0.9614308662181004,
+        "config": {
+            "name": "Exp_3_Specter_TAPT_Top2",
+            "use_tapt": true,
+            "unfreeze": 2,
+            "data": 1.0,
+            "note": "The Challenger: Can we beat BERT by unfreezing slightly?"
+        }
+    },
+    {
+        "experiment": "Exp_4_LowData_Specter",
+        "accuracy": 0.7403846153846154,
+        "f1": 0.6957656082656082,
+        "config": {
+            "name": "Exp_4_LowData_Specter",
+            "use_tapt": true,
+            "unfreeze": 0,
+            "data": 0.1,
+            "note": "Efficiency Check: 10% data only"
+        }
+    }
+]

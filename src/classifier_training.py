@@ -40,7 +40,12 @@ def run_training(model_name):
     
     # 3. Model & Tokenizer Selection
     if model_name == "specter_tapt":
-        model_path = Config.TAPT_OUTPUT_DIR
+        if Config.USE_TAPT_WEIGHTS:
+            model_path = Config.TAPT_OUTPUT_DIR
+            print("Using TAPT weights...")
+        else:
+            model_path = Config.MODEL_NAME
+            print("Using Base Specter 2 weights (No TAPT)...")
     elif model_name == "bert":
         model_path = "bert-base-uncased"
     elif model_name == "roberta":
@@ -76,21 +81,47 @@ def run_training(model_name):
     val_dataset = val_dataset.map(tokenize, batched=True, remove_columns=cols_to_remove)
     
     # 5. Freezing Logic
+    # 5. Freezing Logic
     if "specter" in model_name:
-        print("Freezing encoder layers for SPECTER...")
-        # Specter is BERT based
+        print(f"Configuring layers for SPECTER (Unfreeze last {Config.UNFREEZE_LAST_N_LAYERS})...")
+        
+        # 1. First, freeze EVERYTHING (Base Encoder)
         if hasattr(model, "bert"):
-            for param in model.bert.encoder.parameters():
-                param.requires_grad = False
+            encoder = model.bert.encoder
         elif hasattr(model, "roberta"):
-             for param in model.roberta.encoder.parameters():
-                param.requires_grad = False
+            encoder = model.roberta.encoder
+        else:
+            encoder = model.base_model.encoder
+
+        for param in encoder.parameters():
+            param.requires_grad = False
+            
+        # 2. Always unfreeze the Classifier Head
+        for param in model.classifier.parameters():
+            param.requires_grad = True
+            
+        # 3. Smart Unfreezing of Encoder Layers
+        if Config.UNFREEZE_LAST_N_LAYERS > 0:
+            num_layers = len(encoder.layer) # Usually 12
+            start_layer = num_layers - Config.UNFREEZE_LAST_N_LAYERS
+            
+            print(f"Unfreezing encoder layers {start_layer} to {num_layers - 1}...")
+            for i in range(start_layer, num_layers):
+                for param in encoder.layer[i].parameters():
+                    param.requires_grad = True
     else:
         # BERT/RoBERTa Baselines: Full Fine-Tuning (Standard)
         print(f"Full fine-tuning for {model_name}...")
         
     # 6. Training
-    output_dir = f"./models/{model_name}_classifier"
+    # Data Slicing
+    if Config.DATA_FRACTION < 1.0:
+        subset_size = int(len(train_dataset) * Config.DATA_FRACTION)
+        print(f"Subsampling Training Data: Using {subset_size} samples ({Config.DATA_FRACTION*100}%)")
+        train_dataset = train_dataset.shuffle(seed=Config.SEED).select(range(subset_size))
+
+    # 6. Training
+    output_dir = Config.FINAL_MODEL_DIR
     
     training_args = TrainingArguments(
         output_dir=output_dir,
