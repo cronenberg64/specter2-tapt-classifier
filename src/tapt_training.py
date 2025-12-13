@@ -2,7 +2,7 @@ import torch
 from transformers import AutoTokenizer, AutoModelForMaskedLM, DataCollatorForLanguageModeling, TrainingArguments, Trainer
 from datasets import Dataset
 import pandas as pd
-from config import Config
+from src.config import Config
 import os
 
 def run_tapt():
@@ -17,7 +17,7 @@ def run_tapt():
     
     print(f"Loading tokenizer and model: {Config.MODEL_NAME}...")
     tokenizer = AutoTokenizer.from_pretrained(Config.MODEL_NAME)
-    model = AutoModelForMaskedLM.from_pretrained(Config.MODEL_NAME)
+    model = AutoModelForMaskedLM.from_pretrained(Config.MODEL_NAME, use_safetensors=True)
     
     # Tokenization function
     def tokenize_function(examples):
