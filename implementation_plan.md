@@ -1,4 +1,4 @@
-This plan implements the **SPECTER 2 + TAPT + Layer Freezing** strategy we finalized.
+This plan implements the **SPECTER 2 + TAPT + Layer Freezing** strategy
 
 -----
 
@@ -193,51 +193,59 @@ for param in model.bert.encoder.layer[:6].parameters():
 
 #### **Step 4: The Fine-Tuning - Classification (`src/classifier_training.py`)**
 
-**Instruction to Agent:** "Create the classification training script. It must:
+**Instruction to Agent:** "Create the classification training script. It must be flexible to train different models."
 
-1.  Load `AutoModelForSequenceClassification`.
-2.  **Crucial:** Initialize weights from the `Config.TAPT_OUTPUT_DIR` (the adapted model), NOT the base Hugging Face model.
-3.  **Freeze layers 0-11** (the entire encoder) and ONLY train the classifier head.
-4.  Use `StratifiedShuffleSplit` to create Train/Test sets (80/20).
-5.  Output training logs for the report."
+1.  Accept a `model_name` argument.
+2.  If `model_name` is "specter_tapt", load from `Config.TAPT_OUTPUT_DIR`.
+3.  If `model_name` is "bert", load `bert-base-uncased`.
+4.  If `model_name` is "roberta", load `roberta-base`.
+5.  **Freeze layers:**
+    *   For SPECTER: Freeze encoder (layers 0-11).
+    *   For BERT/RoBERTa: Fine-tune all layers (standard practice for baselines) OR freeze if you want a direct "feature extraction" comparison. *Recommendation: Fine-tune all layers for baselines to give them a fair chance.*
+6.  Use `StratifiedShuffleSplit`.
+7.  Save each model to `./models/{model_name}_classifier`.
 
 #### **Step 5: Evaluation & Visualization (`src/evaluation.py`)**
 
-**Instruction to Agent:** "Create a function that loads the saved `./models/specter_classifier` and runs inference on the Test Set. Generate:
+**Instruction to Agent:** "Create a function that loads ALL trained models and compares them."
 
-1.  A Classification Report (Precision, Recall, F1).
-2.  A Confusion Matrix plot using `seaborn` (save it as `confusion_matrix.png`)."
+1.  Loop through: `['specter_tapt', 'bert', 'roberta']`.
+2.  Load each model and run inference on the Test Set.
+3.  Generate a **Combined Bar Chart** comparing F1-scores.
+4.  Generate individual Confusion Matrices.
+5.  Save results to `results/comparison_report.csv`.
 
 -----
 
 ### **Part 4: The Execution Script (`run_pipeline.py`)**
 
-**Instruction to Agent:** "Create a main script to orchestrate the flow. It should check if data exists, then run TAPT, then run Classification."
+**Instruction to Agent:** "Orchestrate the full comparison."
 
 ```python
 from src.collect_data import fetch_and_save_data
 from src.tapt_training import run_tapt
-from src.classifier_training import run_classification
-from src.evaluation import evaluate_model
+from src.classifier_training import run_training
+from src.evaluation import evaluate_all_models
 import os
 
 def main():
-    # 1. Data Collection
+    # 1. Data
     if not os.path.exists("./data/raw/scientific_abstracts_dataset.csv"):
-        print("Fetching data from arXiv...")
         fetch_and_save_data()
     
-    # 2. TAPT (Innovation Phase)
-    print("--- Starting Phase 1: Task-Adaptive Pre-Training (TAPT) ---")
-    run_tapt()
+    # 2. TAPT (Only for SPECTER)
+    # Check if TAPT is already done to save time
+    if not os.path.exists("./models/specter_tapt"):
+        run_tapt()
     
-    # 3. Classification (Fine-Tuning Phase)
-    print("--- Starting Phase 2: Supervised Fine-Tuning ---")
-    run_classification()
+    # 3. Train Classifiers
+    models_to_train = ["specter_tapt", "bert", "roberta"]
+    for model in models_to_train:
+        print(f"--- Training {model} ---")
+        run_training(model_name=model)
     
     # 4. Evaluation
-    print("--- Generating Report Metrics ---")
-    evaluate_model()
+    evaluate_all_models()
 
 if __name__ == "__main__":
     main()
