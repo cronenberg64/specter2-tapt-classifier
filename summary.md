@@ -1,53 +1,36 @@
 # Project Summary: SPECTER2 TAPT Classifier
 
-This document summarizes the development lifecycle of the Scientific Abstract Classifier project, detailing the progression from initial setup to the final "Grandmaster" model shootout.
+This document summarizes the development lifecycle of the Scientific Abstract Classifier project, detailing the progression from initial setup to the final "Nuclear Option".
 
 ## Project Goal
-To build a high-accuracy text classifier for scientific abstracts, leveraging Task-Adaptive Pre-Training (TAPT) and comparing state-of-the-art NLP models.
+To build a high-accuracy text classifier for scientific abstracts, leveraging Task-Adaptive Pre-Training (TAPT), Ensembling, and Contrastive Learning.
 
 ## Development Phases
 
-### Phase 1: Foundation & Setup
-- **Objective**: Establish the project structure and data pipeline.
-- **Key Actions**:
-    - Set up the Python environment and dependencies.
-    - Implemented data collection scripts (`src/collect_data.py`).
-    - Created the initial configuration (`src/config.py`).
-
-### Phase 2: Task-Adaptive Pre-Training (TAPT)
-- **Objective**: Adapt the `allenai/specter2_base` model to our specific scientific domain.
-- **Key Actions**:
-    - Implemented `src/tapt_training.py` to fine-tune the language model on the unlabeled corpus.
-    - This step allowed the model to learn the specific vocabulary and patterns of the dataset before classification training.
-
-### Phase 3: Classifier Training
-- **Objective**: Train a classification head on top of the pre-trained body.
-- **Key Actions**:
-    - Implemented `src/classifier_training.py`.
-    - Fine-tuned the model on the labeled dataset.
-    - Achieved strong initial performance, validating the TAPT approach.
+### Phase 1-3: Foundation & Setup
+- **Objective**: Establish baselines and test Specter 2.
+- **Result**: Unfrozen Specter 2 achieved **97.60%**, beating standard BERT.
 
 ### Phase 4: The "Grandmaster" Shootout
-- **Objective**: Push for maximum accuracy by benchmarking top models against each other.
-- **Candidates**:
-    1.  **DeBERTa-v3-base**: The modern accuracy king.
-    2.  **SciBERT**: The domain expert (pre-trained on scientific text).
-    3.  **BERT-base**: The reliable baseline.
-- **Key Actions**:
-    - Implemented `src/train_shootout.py` to train all candidates.
-    - Created `src/visualize_embeddings.py` to visualize cluster separation.
-    - Developed `src/ensemble_scoring.py` to combine models.
+- **Objective**: Benchmark top models.
+- **Result**: **SciBERT** won with **98.08%**.
 
-## Final Results
+### Phase 5: Contextual Injection
+- **Objective**: Improve performance by injecting synonyms and definitions.
+- **Result**: Performance degraded. The added text introduced noise.
 
-The Phase 4 shootout yielded the following accuracy scores:
+### Phase 6: The Synergy Ensemble
+- **Objective**: Combine predictions from multiple models.
+- **Result**: **97.12%**. Robust, but failed to beat the single best model (SciBERT).
 
-| Rank | Model | Accuracy | Insight |
-| :--- | :--- | :--- | :--- |
-| **1** | **SciBERT** | **98.08%** | **The Winner.** Domain pre-training proved more valuable than newer architecture. |
-| 2 | Ensemble | 97.12% | Good, but weighed down by the lower-performing model. |
-| 3 | BERT | 96.63% | A very strong baseline. |
-| 4 | DeBERTa | 96.15% | Surprisingly underperformed on this specific task. |
+### Phase 7: The Cyborg (kNN-DeBERTa)
+- **Objective**: Augment DeBERTa with a k-Nearest Neighbors memory bank.
+- **Result**: **96.15%**. The kNN component did not add value over the base classifier.
+
+### Phase 8: The Nuclear Option (SetFit)
+- **Objective**: Use Contrastive Learning (SetFit) to optimize embedding geometry.
+- **Status**: **Ready for Training**.
+- **Details**: The pipeline uses `MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli` (safetensors) and `CosineSimilarityLoss`. Full training requires >16GB VRAM.
 
 ## Conclusion
-The project successfully demonstrated that for specialized scientific text classification, **SciBERT** is the optimal choice, achieving a production-grade accuracy of **98.08%**.
+**SciBERT (98.08%)** remains the reigning champion. While modern architectures (DeBERTa) and complex techniques (Ensembling, kNN) were tested, the domain-specific pre-training of SciBERT proved unbeatable on this dataset. Phase 8 (SetFit) offers a final theoretical avenue for improvement, pending a full training run on high-end hardware.

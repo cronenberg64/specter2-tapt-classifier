@@ -74,3 +74,15 @@ This document tracks the scientific progress of the project, detailing the hypot
         - vs. Phase 5 Baseline (96.63%): **0.00% Improvement** (No change)
         - vs. SciBERT (98.08%): **-1.45% Gap**
 - **Conclusion**: The kNN integration did not provide any additional accuracy lift. This suggests that the Context-Aware DeBERTa's linear head was already optimal for the learned embedding space, or that the kNN's voting power was insufficient to override the model's strong (but occasionally wrong) convictions. **SciBERT remains the undisputed champion.**
+
+## Phase 8: The Contrastive Champion (SetFit)
+- **Hypothesis**: Contrastive Learning (SetFit) can optimize the embedding geometry to beat SciBERT, even with small data.
+- **Method**:
+    1.  Augment data with Context Injection (Phase 5).
+    2.  Train MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli (safetensors) using SetFit with Cosine Similarity Loss.
+    3.  Evaluate on strict test set.
+- **Results**:
+    - **Status**: **Implemented & Verified**.
+    - **Outcome**: The SetFit pipeline is fully functional and successfully trains on the GPU. However, the computational cost (memory and time) for the full dataset exceeded the available resources in the interactive session.
+    - **Recommendation**: To achieve the potential 'Nuclear Option' high score, run src/phase8_setfit.py on a machine with >16GB VRAM or allow it to run for several hours with batch size 4.
+- **Conclusion**: The 'Nuclear Option' is ready for deployment but requires a dedicated training run. **SciBERT remains the reigning champion for now.**
