@@ -1,7 +1,0 @@
-text_snippet,sci_pred,sci_conf,deb_pred,deb_conf,final_decision,correct
-"Chronic upper extremity (UE) impairment is common after stroke. This study evaluated Boost, a novel ",0,0.88,2,0.61,0,False
-High-definition transcranial direct current stimulation (HD-tDCS) dosing in children remains largely,0,0.99,2,0.98,0,True
-Machine learning models of vastly different modalities and architectures are being trained to predic,1,1.00,0,0.99,1,True
-Mechanistic models can provide an intuitive and interpretable explanation of network growth by speci,0,0.82,2,0.99,2,False
-The slime mould Physarum polycephalum displays adaptive transport dynamics and network formation tha,0,1.00,1,1.00,0,False
-Computer vision methods are increasingly used for the automated analysis of large volumes of video d,2,0.74,0,0.63,2,False

@@ -15,7 +15,7 @@
 2.  **Run the "Nuclear Option" (Phase 8)**:
     *   *Note: This requires significant GPU memory. If running on <16GB VRAM, reduce batch size in `src/phase8_setfit.py`.*
     ```bash
-    python -m src.phase8_setfit
+    python -m scripts.phase8_setfit
     ```
 
 ---
@@ -61,14 +61,15 @@ The goal of this project was to build the ultimate scientific abstract classifie
 - **Note**: The pipeline is ready. Due to hardware constraints on the dev machine, the full training run is deferred to the high-performance workstation.
 
 ## 📂 Directory Structure
+- `scripts/`: Entry point scripts (e.g., `run_phase4.py`).
 - `src/`: Source code for all phases.
 - `data/`: Datasets (Raw and Processed).
 - `models/`: Saved model artifacts (Ignored by Git).
 - `results/plots/`: Visualizations from all phases.
 - `results/logs/`: Execution logs.
-- `docs/`: Implementation plans and notes.
+- `docs/`: Implementation plans, results (`phase_results.md`), and summary.
 
 ## 🔧 Key Scripts
 - `src/phase8_setfit.py`: The final contrastive learning implementation.
 - `src/generate_augmented_data.py`: Data augmentation for Phase 8.
-- `src/train_shootout.py`: Phase 4 benchmarking script.
+- `scripts/run_phase4.py`: Phase 4 benchmarking script.
