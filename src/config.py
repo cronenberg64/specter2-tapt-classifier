@@ -16,17 +16,22 @@ class Config:
     
     # PHASE 4: THE GRANDMASTER
     PHASE4_DIR = "./models/phase4_shootout"
+    
+    # THE CANDIDATES
+    # We will loop through these to find the King.
     MODEL_CANDIDATES = [
-        "roberta-large",                    # The "Accuracy King" (Replaces DeBERTa due to Windows SP issues)
+        "microsoft/deberta-v3-base",        # The "Accuracy King"
         "allenai/scibert_scivocab_uncased", # The "Domain Expert"
         "google-bert/bert-base-uncased"     # The Baseline (to re-confirm)
     ]
-    EPOCHS_SHOOTOUT = 1      # Reduced for CPU speed
-    LEARNING_RATE = 2e-5
+    
+    # Training Params for Phase 4
+    EPOCHS_SHOOTOUT = 4      # Short & sweet; these models learn fast
+    BATCH_SIZE = 8
+    LEARNING_RATE = 2e-5     # Standard safe rate
     
     # Training Hyperparameters
     MAX_LENGTH = 512
-    BATCH_SIZE = 8
     LEARNING_RATE_TAPT = 2e-5      # Lower for TAPT to be gentle
     LEARNING_RATE_CLF = 5e-5       # Standard for classification
     EPOCHS_TAPT = 10               # Needs time to learn vocabulary

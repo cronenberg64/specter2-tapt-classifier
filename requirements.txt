@@ -8,3 +8,6 @@ datasets
 tqdm
 matplotlib
 seaborn
+
+sentencepiece
+protobuf
