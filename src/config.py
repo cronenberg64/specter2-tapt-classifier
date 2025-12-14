@@ -4,10 +4,16 @@ class Config:
     # Model ID
     MODEL_NAME = "allenai/specter2_base"
     
+    import os
+    
+    # Project Root (calculated dynamically)
+    PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+    
     # Paths
-    DATA_PATH = "./data/raw/scientific_abstracts_dataset.csv"
-    TAPT_OUTPUT_DIR = "./models/specter_tapt"
-    FINAL_MODEL_DIR = "./models/specter_classifier"
+    DATA_PATH = os.path.join(PROJECT_ROOT, "data/raw/scientific_abstracts_dataset.csv")
+    TAPT_OUTPUT_DIR = os.path.join(PROJECT_ROOT, "models/specter_tapt")
+    FINAL_MODEL_DIR = os.path.join(PROJECT_ROOT, "models/specter_classifier")
+    ASSOCIATIVITY_MAP_PATH = os.path.join(PROJECT_ROOT, "data/associativity_map.json")
     
     # NEW: Experiment Control Knobs (Defaults)
     USE_TAPT_WEIGHTS = True       # True = use ./models/specter_tapt, False = use allenai/specter2_base
@@ -15,7 +21,7 @@ class Config:
     DATA_FRACTION = 0.2           # Reduced to 20% for CPU speed test
     
     # PHASE 4: THE GRANDMASTER
-    PHASE4_DIR = "./models/phase4_shootout"
+    PHASE4_DIR = os.path.join(PROJECT_ROOT, "models/phase4_shootout")
     
     # THE CANDIDATES
     # We will loop through these to find the King.

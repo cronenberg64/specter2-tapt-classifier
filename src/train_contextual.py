@@ -16,7 +16,7 @@ def run_contextual_training():
     
     # 1. Load the Map
     try:
-        with open("data/associativity_map.json", "r") as f:
+        with open(Config.ASSOCIATIVITY_MAP_PATH, "r") as f:
             assoc_map = json.load(f)
     except FileNotFoundError:
         print("Error: Associativity Map not found. Run src/build_associativity.py first.")
@@ -86,6 +86,7 @@ def run_contextual_training():
     )
     
     trainer.train()
+    trainer.save_model() # Save the best model (loaded at end)
     metrics = trainer.evaluate()
     print(f"\n>>> FINAL CONTEXTUAL RESULT: {metrics['eval_accuracy']:.4f}")
 

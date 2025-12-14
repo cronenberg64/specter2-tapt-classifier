@@ -51,3 +51,26 @@ This document tracks the scientific progress of the project, detailing the hypot
         - vs. Baseline DeBERTa (96.15%): **+0.97% Improvement** (Success!)
         - vs. SciBERT (98.08%): **-0.96% Gap** (Failed to beat domain pre-training)
 - **Conclusion**: Context injection **works**, significantly boosting the generalist model's performance. However, it is not enough to overcome the massive advantage of a model pre-trained entirely on scientific text (SciBERT). **SciBERT remains the champion.**
+
+## Phase 6: The Synergy Ensemble
+- **Hypothesis**: Combining the domain expert (SciBERT) with the context-aware generalist (Context-DeBERTa) using confidence-weighted voting will yield the best of both worlds.
+- **Method**: Weighted Softmax Voting (0.6 SciBERT + 0.4 DeBERTa).
+- **Results**:
+    - **Accuracy**: **97.60%**
+    - **Comparison**:
+        - vs. Phase 5 (97.12%): **+0.48% Improvement**
+        - vs. SciBERT (98.08%): **-0.48% Gap**
+- **Conclusion**: The ensemble is robust and highly accurate, effectively filtering out some errors. However, SciBERT's raw domain mastery still edges it out slightly. **SciBERT is the definitive winner of this project.**
+
+## Phase 7: The 'Cyborg' DeBERTa
+- **Hypothesis**: Combining the Context-Aware DeBERTa with a kNN classifier (trained on its own embeddings) will correct linear decision boundary errors and improve accuracy.
+- **Method**:
+    1.  Extract [CLS] embeddings from the Context-Aware DeBERTa.
+    2.  Train a kNN classifier (=5$, cosine metric) on the training embeddings.
+    3.  Blend Linear Head probabilities (60%) with kNN probabilities (40%).
+- **Results**:
+    - **Accuracy**: **96.63%**
+    - **Comparison**:
+        - vs. Phase 5 Baseline (96.63%): **0.00% Improvement** (No change)
+        - vs. SciBERT (98.08%): **-1.45% Gap**
+- **Conclusion**: The kNN integration did not provide any additional accuracy lift. This suggests that the Context-Aware DeBERTa's linear head was already optimal for the learned embedding space, or that the kNN's voting power was insufficient to override the model's strong (but occasionally wrong) convictions. **SciBERT remains the undisputed champion.**

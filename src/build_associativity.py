@@ -4,6 +4,10 @@ import numpy as np
 import json
 import nltk
 from nltk.corpus import wordnet
+import sys
+import os
+# Add project root to sys.path to allow running script directly
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 # Ensure we have the dictionary downloaded
 nltk.download('wordnet')
@@ -55,7 +59,11 @@ def build_associativity_map():
                 }
             
     # 4. Save the Map
-    output_path = "data/associativity_map.json"
+    # Need to import Config here or just use absolute path logic if Config is not imported.
+    # Since Config is not imported in the original script, let's just use os.path logic or import Config.
+    # Importing Config is cleaner.
+    from src.config import Config
+    output_path = Config.ASSOCIATIVITY_MAP_PATH
     with open(output_path, "w") as f:
         json.dump(associativity_map, f, indent=4)
         
