@@ -11,3 +11,5 @@ seaborn
 
 sentencepiece
 protobuf
+
+nltk

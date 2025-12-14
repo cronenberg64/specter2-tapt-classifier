@@ -1,0 +1,952 @@
+{
+    "data": {
+        "domain": "Bioinformatics",
+        "synonyms": [
+            "data point",
+            "information",
+            "datum"
+        ]
+    },
+    "model": {
+        "domain": "Bioinformatics",
+        "synonyms": [
+            "exemplary",
+            "framework",
+            "modelling"
+        ]
+    },
+    "models": {
+        "domain": "Bioinformatics",
+        "synonyms": [
+            "framework",
+            "modelling",
+            "good example"
+        ]
+    },
+    "based": {
+        "domain": "Bioinformatics",
+        "synonyms": [
+            "ground",
+            "free-base",
+            "base"
+        ]
+    },
+    "framework": {
+        "domain": "Bioinformatics",
+        "synonyms": [
+            "theoretical account",
+            "model",
+            "fabric"
+        ]
+    },
+    "using": {
+        "domain": "Bioinformatics",
+        "synonyms": [
+            "utilize",
+            "exploitation",
+            "apply"
+        ]
+    },
+    "cell": {
+        "domain": "Bioinformatics",
+        "synonyms": [
+            "cellular telephone",
+            "mobile phone",
+            "cellphone"
+        ]
+    },
+    "analysis": {
+        "domain": "Bioinformatics",
+        "synonyms": [
+            "psychoanalysis",
+            "depth psychology",
+            "analytic thinking"
+        ]
+    },
+    "protein": {
+        "domain": "Bioinformatics",
+        "synonyms": []
+    },
+    "clinical": {
+        "domain": "Bioinformatics",
+        "synonyms": []
+    },
+    "methods": {
+        "domain": "Bioinformatics",
+        "synonyms": [
+            "method acting",
+            "method"
+        ]
+    },
+    "learning": {
+        "domain": "Bioinformatics",
+        "synonyms": [
+            "take",
+            "teach",
+            "acquire"
+        ]
+    },
+    "performance": {
+        "domain": "Bioinformatics",
+        "synonyms": [
+            "functioning",
+            "operation",
+            "carrying out"
+        ]
+    },
+    "time": {
+        "domain": "Bioinformatics",
+        "synonyms": [
+            "fourth dimension",
+            "metre",
+            "sentence"
+        ]
+    },
+    "high": {
+        "domain": "Bioinformatics",
+        "synonyms": [
+            "heights",
+            "senior high school",
+            "eminent"
+        ]
+    },
+    "results": {
+        "domain": "Bioinformatics",
+        "synonyms": [
+            "final result",
+            "consequence",
+            "resultant role"
+        ]
+    },
+    "disease": {
+        "domain": "Bioinformatics",
+        "synonyms": []
+    },
+    "prediction": {
+        "domain": "Bioinformatics",
+        "synonyms": [
+            "forecasting",
+            "prognostication",
+            "prevision"
+        ]
+    },
+    "drug": {
+        "domain": "Bioinformatics",
+        "synonyms": [
+            "dose",
+            "do drugs"
+        ]
+    },
+    "biological": {
+        "domain": "Bioinformatics",
+        "synonyms": [
+            "biologic"
+        ]
+    },
+    "study": {
+        "domain": "Bioinformatics",
+        "synonyms": [
+            "sketch",
+            "meditate",
+            "take"
+        ]
+    },
+    "large": {
+        "domain": "Bioinformatics",
+        "synonyms": [
+            "prominent",
+            "great",
+            "tumid"
+        ]
+    },
+    "molecular": {
+        "domain": "Bioinformatics",
+        "synonyms": []
+    },
+    "cancer": {
+        "domain": "Bioinformatics",
+        "synonyms": [
+            "genus Cancer",
+            "Crab",
+            "Cancer the Crab"
+        ]
+    },
+    "datasets": {
+        "domain": "Bioinformatics",
+        "synonyms": []
+    },
+    "approach": {
+        "domain": "Bioinformatics",
+        "synonyms": [
+            "near",
+            "glide slope",
+            "go about"
+        ]
+    },
+    "systems": {
+        "domain": "Bioinformatics",
+        "synonyms": [
+            "organization",
+            "organisation",
+            "system"
+        ]
+    },
+    "method": {
+        "domain": "Bioinformatics",
+        "synonyms": [
+            "method acting"
+        ]
+    },
+    "accuracy": {
+        "domain": "Bioinformatics",
+        "synonyms": [
+            "truth"
+        ]
+    },
+    "network": {
+        "domain": "Bioinformatics",
+        "synonyms": [
+            "meshwork",
+            "electronic network",
+            "mesh"
+        ]
+    },
+    "features": {
+        "domain": "Bioinformatics",
+        "synonyms": [
+            "characteristic",
+            "lineament",
+            "feature of speech"
+        ]
+    },
+    "single": {
+        "domain": "Bioinformatics",
+        "synonyms": [
+            "undivided",
+            "exclusive",
+            "bingle"
+        ]
+    },
+    "introduce": {
+        "domain": "Bioinformatics",
+        "synonyms": [
+            "stick in",
+            "enter",
+            "infix"
+        ]
+    },
+    "spatial": {
+        "domain": "Bioinformatics",
+        "synonyms": [
+            "spacial"
+        ]
+    },
+    "information": {
+        "domain": "Bioinformatics",
+        "synonyms": [
+            "entropy",
+            "data",
+            "info"
+        ]
+    },
+    "tissue": {
+        "domain": "Bioinformatics",
+        "synonyms": [
+            "tissue paper",
+            "weave"
+        ]
+    },
+    "demonstrate": {
+        "domain": "Bioinformatics",
+        "synonyms": [
+            "evidence",
+            "march",
+            "prove"
+        ]
+    },
+    "multi": {
+        "domain": "Bioinformatics",
+        "synonyms": []
+    },
+    "design": {
+        "domain": "Bioinformatics",
+        "synonyms": [
+            "aim",
+            "invention",
+            "pattern"
+        ]
+    },
+    "complex": {
+        "domain": "Bioinformatics",
+        "synonyms": [
+            "building complex",
+            "coordination compound",
+            "composite"
+        ]
+    },
+    "dynamics": {
+        "domain": "Bioinformatics",
+        "synonyms": [
+            "kinetics",
+            "dynamic",
+            "moral force"
+        ]
+    },
+    "level": {
+        "domain": "Bioinformatics",
+        "synonyms": [
+            "level off",
+            "raze",
+            "layer"
+        ]
+    },
+    "deep": {
+        "domain": "Bioinformatics",
+        "synonyms": [
+            "cryptical",
+            "trench",
+            "rich"
+        ]
+    },
+    "including": {
+        "domain": "Bioinformatics",
+        "synonyms": [
+            "admit",
+            "include",
+            "let in"
+        ]
+    },
+    "approaches": {
+        "domain": "Bioinformatics",
+        "synonyms": [
+            "near",
+            "glide slope",
+            "go about"
+        ]
+    },
+    "neural": {
+        "domain": "Bioinformatics",
+        "synonyms": [
+            "neuronic",
+            "nervous",
+            "neuronal"
+        ]
+    },
+    "work": {
+        "domain": "Bioinformatics",
+        "synonyms": [
+            "work out",
+            "process",
+            "bring"
+        ]
+    },
+    "structure": {
+        "domain": "Bioinformatics",
+        "synonyms": [
+            "social system",
+            "complex body part",
+            "social structure"
+        ]
+    },
+    "existing": {
+        "domain": "Bioinformatics",
+        "synonyms": [
+            "subsist",
+            "existent",
+            "survive"
+        ]
+    },
+    "present": {
+        "domain": "Bioinformatics",
+        "synonyms": [
+            "deliver",
+            "exhibit",
+            "confront"
+        ]
+    },
+    "state": {
+        "domain": "Bioinformatics",
+        "synonyms": [
+            "posit",
+            "put forward",
+            "express"
+        ]
+    },
+    "potential": {
+        "domain": "Bioinformatics",
+        "synonyms": [
+            "voltage",
+            "potential difference",
+            "electric potential"
+        ]
+    },
+    "specific": {
+        "domain": "Bioinformatics",
+        "synonyms": [
+            "particular"
+        ]
+    },
+    "quality": {
+        "domain": "Bioinformatics",
+        "synonyms": [
+            "lineament",
+            "tone",
+            "calibre"
+        ]
+    },
+    "imaging": {
+        "domain": "Bioinformatics",
+        "synonyms": [
+            "imagery",
+            "imagination",
+            "visualise"
+        ]
+    },
+    "used": {
+        "domain": "Bioinformatics",
+        "synonyms": [
+            "utilize",
+            "ill-used",
+            "apply"
+        ]
+    },
+    "ai": {
+        "domain": "Bioinformatics",
+        "synonyms": [
+            "artificial insemination",
+            "Army Intelligence",
+            "Bradypus tridactylus"
+        ]
+    },
+    "novel": {
+        "domain": "Bioinformatics",
+        "synonyms": [
+            "refreshing",
+            "fresh",
+            "new"
+        ]
+    },
+    "gene": {
+        "domain": "Bioinformatics",
+        "synonyms": [
+            "cistron",
+            "factor"
+        ]
+    },
+    "scale": {
+        "domain": "Bioinformatics",
+        "synonyms": [
+            "shell",
+            "graduated table",
+            "plate"
+        ]
+    },
+    "materials": {
+        "domain": "Materials Science",
+        "synonyms": [
+            "stuff",
+            "cloth",
+            "material"
+        ]
+    },
+    "spin": {
+        "domain": "Materials Science",
+        "synonyms": [
+            "twisting",
+            "whirl",
+            "tailspin"
+        ]
+    },
+    "_2": {
+        "domain": "Materials Science",
+        "synonyms": []
+    },
+    "crystal": {
+        "domain": "Materials Science",
+        "synonyms": [
+            "crystallization",
+            "quartz",
+            "lechatelierite"
+        ]
+    },
+    "electronic": {
+        "domain": "Materials Science",
+        "synonyms": []
+    },
+    "magnetic": {
+        "domain": "Materials Science",
+        "synonyms": [
+            "charismatic",
+            "magnetised",
+            "magnetized"
+        ]
+    },
+    "properties": {
+        "domain": "Materials Science",
+        "synonyms": [
+            "place",
+            "prop",
+            "property"
+        ]
+    },
+    "quantum": {
+        "domain": "Materials Science",
+        "synonyms": []
+    },
+    "energy": {
+        "domain": "Materials Science",
+        "synonyms": [
+            "vim",
+            "muscularity",
+            "zip"
+        ]
+    },
+    "electron": {
+        "domain": "Materials Science",
+        "synonyms": [
+            "negatron"
+        ]
+    },
+    "_3": {
+        "domain": "Materials Science",
+        "synonyms": []
+    },
+    "temperature": {
+        "domain": "Materials Science",
+        "synonyms": []
+    },
+    "surface": {
+        "domain": "Materials Science",
+        "synonyms": [
+            "turn up",
+            "open",
+            "show up"
+        ]
+    },
+    "density": {
+        "domain": "Materials Science",
+        "synonyms": [
+            "tightness",
+            "concentration",
+            "compactness"
+        ]
+    },
+    "phase": {
+        "domain": "Materials Science",
+        "synonyms": [
+            "stage",
+            "phase angle",
+            "form"
+        ]
+    },
+    "charge": {
+        "domain": "Materials Science",
+        "synonyms": [
+            "tear",
+            "bearing",
+            "burster"
+        ]
+    },
+    "field": {
+        "domain": "Materials Science",
+        "synonyms": [
+            "field of honor",
+            "line of business",
+            "orbit"
+        ]
+    },
+    "optical": {
+        "domain": "Materials Science",
+        "synonyms": [
+            "ocular",
+            "opthalmic",
+            "optic"
+        ]
+    },
+    "metal": {
+        "domain": "Materials Science",
+        "synonyms": [
+            "metallic element",
+            "metallic",
+            "alloy"
+        ]
+    },
+    "phonon": {
+        "domain": "Materials Science",
+        "synonyms": []
+    },
+    "lattice": {
+        "domain": "Materials Science",
+        "synonyms": [
+            "grille",
+            "fretwork",
+            "latticework"
+        ]
+    },
+    "transport": {
+        "domain": "Materials Science",
+        "synonyms": [
+            "transferral",
+            "enthral",
+            "shipping"
+        ]
+    },
+    "calculations": {
+        "domain": "Materials Science",
+        "synonyms": [
+            "computation",
+            "deliberation",
+            "reckoning"
+        ]
+    },
+    "material": {
+        "domain": "Materials Science",
+        "synonyms": [
+            "stuff",
+            "cloth",
+            "real"
+        ]
+    },
+    "low": {
+        "domain": "Materials Science",
+        "synonyms": [
+            "low-spirited",
+            "scurvy",
+            "depressed"
+        ]
+    },
+    "thermal": {
+        "domain": "Materials Science",
+        "synonyms": [
+            "thermic",
+            "caloric"
+        ]
+    },
+    "defect": {
+        "domain": "Materials Science",
+        "synonyms": [
+            "mar",
+            "shortcoming",
+            "fault"
+        ]
+    },
+    "experimental": {
+        "domain": "Materials Science",
+        "synonyms": [
+            "data-based",
+            "observational"
+        ]
+    },
+    "si": {
+        "domain": "Materials Science",
+        "synonyms": [
+            "te",
+            "Systeme International d'Unites",
+            "Systeme International"
+        ]
+    },
+    "strain": {
+        "domain": "Materials Science",
+        "synonyms": [
+            "air",
+            "stock",
+            "form"
+        ]
+    },
+    "symmetry": {
+        "domain": "Materials Science",
+        "synonyms": [
+            "proportion",
+            "correspondence",
+            "balance"
+        ]
+    },
+    "theory": {
+        "domain": "Materials Science",
+        "synonyms": [
+            "possibility",
+            "hypothesis"
+        ]
+    },
+    "structural": {
+        "domain": "Materials Science",
+        "synonyms": [
+            "geomorphologic",
+            "morphologic",
+            "morphological"
+        ]
+    },
+    "dimensional": {
+        "domain": "Materials Science",
+        "synonyms": []
+    },
+    "band": {
+        "domain": "Materials Science",
+        "synonyms": [
+            "set",
+            "stria",
+            "dance orchestra"
+        ]
+    },
+    "topological": {
+        "domain": "Materials Science",
+        "synonyms": [
+            "topologic"
+        ]
+    },
+    "states": {
+        "domain": "Materials Science",
+        "synonyms": [
+            "put forward",
+            "province",
+            "say"
+        ]
+    },
+    "non": {
+        "domain": "Materials Science",
+        "synonyms": [
+            "not"
+        ]
+    },
+    "perovskite": {
+        "domain": "Materials Science",
+        "synonyms": []
+    },
+    "dft": {
+        "domain": "Materials Science",
+        "synonyms": []
+    },
+    "transition": {
+        "domain": "Materials Science",
+        "synonyms": [
+            "passage",
+            "modulation",
+            "changeover"
+        ]
+    },
+    "order": {
+        "domain": "Materials Science",
+        "synonyms": [
+            "enjoin",
+            "dictate",
+            "social club"
+        ]
+    },
+    "measurements": {
+        "domain": "Materials Science",
+        "synonyms": [
+            "mensuration",
+            "measure",
+            "measurement"
+        ]
+    },
+    "fe": {
+        "domain": "Materials Science",
+        "synonyms": [
+            "atomic number 26",
+            "iron"
+        ]
+    },
+    "films": {
+        "domain": "Materials Science",
+        "synonyms": [
+            "flick",
+            "take",
+            "picture"
+        ]
+    },
+    "brain": {
+        "domain": "Neuroscience",
+        "synonyms": [
+            "learning ability",
+            "mentality",
+            "brainiac"
+        ]
+    },
+    "eeg": {
+        "domain": "Neuroscience",
+        "synonyms": [
+            "encephalogram",
+            "electroencephalogram"
+        ]
+    },
+    "activity": {
+        "domain": "Neuroscience",
+        "synonyms": [
+            "activeness",
+            "body process",
+            "bodily process"
+        ]
+    },
+    "networks": {
+        "domain": "Neuroscience",
+        "synonyms": [
+            "network",
+            "meshwork",
+            "electronic network"
+        ]
+    },
+    "human": {
+        "domain": "Neuroscience",
+        "synonyms": [
+            "human being",
+            "man",
+            "homo"
+        ]
+    },
+    "cognitive": {
+        "domain": "Neuroscience",
+        "synonyms": []
+    },
+    "visual": {
+        "domain": "Neuroscience",
+        "synonyms": [
+            "optical",
+            "ocular",
+            "optic"
+        ]
+    },
+    "neurons": {
+        "domain": "Neuroscience",
+        "synonyms": [
+            "neuron",
+            "nerve cell"
+        ]
+    },
+    "task": {
+        "domain": "Neuroscience",
+        "synonyms": [
+            "tax",
+            "project",
+            "chore"
+        ]
+    },
+    "functional": {
+        "domain": "Neuroscience",
+        "synonyms": [
+            "working",
+            "usable",
+            "running"
+        ]
+    },
+    "neuroscience": {
+        "domain": "Neuroscience",
+        "synonyms": []
+    },
+    "fmri": {
+        "domain": "Neuroscience",
+        "synonyms": [
+            "functional magnetic resonance imaging"
+        ]
+    },
+    "representations": {
+        "domain": "Neuroscience",
+        "synonyms": [
+            "representation",
+            "delegacy",
+            "agency"
+        ]
+    },
+    "cortical": {
+        "domain": "Neuroscience",
+        "synonyms": []
+    },
+    "decoding": {
+        "domain": "Neuroscience",
+        "synonyms": [
+            "decrypt",
+            "decipherment",
+            "decryption"
+        ]
+    },
+    "patterns": {
+        "domain": "Neuroscience",
+        "synonyms": [
+            "pattern",
+            "traffic pattern",
+            "radiation pattern"
+        ]
+    },
+    "memory": {
+        "domain": "Neuroscience",
+        "synonyms": [
+            "remembering",
+            "memory board",
+            "storage"
+        ]
+    },
+    "different": {
+        "domain": "Neuroscience",
+        "synonyms": [
+            "unlike",
+            "dissimilar"
+        ]
+    },
+    "findings": {
+        "domain": "Neuroscience",
+        "synonyms": [
+            "determination",
+            "finding"
+        ]
+    },
+    "connectivity": {
+        "domain": "Neuroscience",
+        "synonyms": []
+    },
+    "computational": {
+        "domain": "Neuroscience",
+        "synonyms": []
+    },
+    "understanding": {
+        "domain": "Neuroscience",
+        "synonyms": [
+            "savvy",
+            "intellect",
+            "sympathy"
+        ]
+    },
+    "signals": {
+        "domain": "Neuroscience",
+        "synonyms": [
+            "indicate",
+            "signaling",
+            "sign"
+        ]
+    },
+    "tasks": {
+        "domain": "Neuroscience",
+        "synonyms": [
+            "tax",
+            "task",
+            "project"
+        ]
+    },
+    "language": {
+        "domain": "Neuroscience",
+        "synonyms": [
+            "linguistic process",
+            "linguistic communication",
+            "spoken communication"
+        ]
+    },
+    "space": {
+        "domain": "Neuroscience",
+        "synonyms": [
+            "distance",
+            "place",
+            "outer space"
+        ]
+    },
+    "processing": {
+        "domain": "Neuroscience",
+        "synonyms": [
+            "work",
+            "process",
+            "march"
+        ]
+    },
+    "perceptual": {
+        "domain": "Neuroscience",
+        "synonyms": []
+    }
+}
