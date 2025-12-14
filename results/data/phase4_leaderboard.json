@@ -1,0 +1,20 @@
+[
+    {
+        "model": "microsoft/deberta-v3-base",
+        "accuracy": 0.9615384615384616,
+        "loss": 0.17355069518089294,
+        "path": "./models/phase4_shootout/deberta-v3-base"
+    },
+    {
+        "model": "allenai/scibert_scivocab_uncased",
+        "accuracy": 0.9807692307692307,
+        "loss": 0.08244435489177704,
+        "path": "./models/phase4_shootout/scibert_scivocab_uncased"
+    },
+    {
+        "model": "google-bert/bert-base-uncased",
+        "accuracy": 0.9663461538461539,
+        "loss": 0.10206643491983414,
+        "path": "./models/phase4_shootout/bert-base-uncased"
+    }
+]

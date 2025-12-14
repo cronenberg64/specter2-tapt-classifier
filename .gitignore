@@ -7,7 +7,6 @@ venv/
 
 # Models & Data (Large Files)
 models/
-data/
 *.safetensors
 *.bin
 *.pt
