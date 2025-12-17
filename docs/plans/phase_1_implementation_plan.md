@@ -268,6 +268,3 @@ When the code finishes, you will have the logs and the confusion matrix. Here is
 **3. Model Architecture Section:**
 
 > "To prevent catastrophic forgetting of the citation-based embeddings, we utilized a **Layer Freezing** strategy (`src/classifier_training.py`). We froze the bottom 6 layers during TAPT and the entire encoder during classification, training only the classification head. This leverages the pre-trained citation graph structure of SPECTER 2 while minimizing the risk of overfitting on a small dataset."
-
-**Next Step:**
-You can literally copy the text from **Part 1** through **Part 4** and paste it into your coding agent now. It will generate the full working project. Do you want me to explain how to interpret the "Confusion Matrix" once you get it?
