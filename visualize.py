@@ -5,7 +5,7 @@ import seaborn as sns
 from sklearn.manifold import TSNE
 from sentence_transformers import SentenceTransformer
 from datasets import load_dataset
-from src.config import Config
+from config import Config
 import os
 
 def visualize_fair_duel():
@@ -103,7 +103,7 @@ def visualize_fair_duel():
             print(f"Error processing {name}: {e}")
 
     plt.tight_layout()
-    output_file = "phase8_clash_of_titans.png"
+    output_file = "results/figures/clash_of_titans.png"
     plt.savefig(output_file)
     print(f"\nVICTORY! Visualization saved to {output_file}")
 

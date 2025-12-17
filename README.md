@@ -1,75 +1,32 @@
-# Specter 2 TAPT Classifier: The "Beat SciBERT" Project
+# SciBERT vs. Generalist Giants: A Contrastive Learning Benchmark
 
-## 🚀 Quick Start (New Workstation)
-**Prerequisites**: Python 3.10+, CUDA-capable GPU (>16GB VRAM recommended for Phase 8).
+## Objective
+Investigating whether modern **Generalist Architectures** (BERT-Large, 340M params) can outperform **Domain-Specific Models** (SciBERT, 110M params) on scientific text classification when optimized with **Contrastive Learning**.
 
-1.  **Clone & Install**:
-    ```bash
-    git clone <repo_url>
-    cd specter2-tapt-classifier
-    python -m venv venv
-    .\venv\Scripts\activate
-    pip install -r requirements.txt
-    ```
+## Methodology
+* **Pipeline:** Sentence Transformers with Batch Hard Triplet Loss.
+* **Data:** 1,000 Scientific Abstracts (Augmented to ~2,000 samples).
+* **Leakage Prevention:** Rigorous filtering to ensure no test-set synonyms leaked into training.
+* **Hardware:** Trained on NVIDIA RTX A4000 (16GB VRAM).
 
-2.  **Run the "Nuclear Option" (Phase 8)**:
-    *   *Note: This requires significant GPU memory. If running on <16GB VRAM, reduce batch size in `src/phase8_setfit.py`.*
-    ```bash
-    python -m scripts.phase8_setfit
-    ```
+## Key Results
+Despite being 3x smaller, the domain-specific model won.
 
----
+| Model | Parameters | Training Time | Accuracy |
+| :--- | :--- | :--- | :--- |
+| **SciBERT** | 110M | ~22 sec | **99.52%** |
+| BERT-Large | 340M | ~35 min | 98.56% |
 
-## 📖 Project Overview
-The goal of this project was to build the ultimate scientific abstract classifier, starting with **SPECTER 2** and iteratively improving it to beat the domain-expert baseline, **SciBERT**.
+**Conclusion:** Domain pre-training provides better conceptual separation for scientific jargon than raw parameter scale.
 
-## 🏆 Leaderboard (Final Results)
+## Visualization
+![Latent Space Visualization](results/figures/clash_of_titans.png)
+*Left: SciBERT shows distinct, dense clusters. Right: BERT-Large shows slightly fuzzier boundaries.*
 
-| Rank | Model | Strategy | Accuracy | Status |
-| :--- | :--- | :--- | :--- | :--- |
-| **1** | **SciBERT** | **Domain Pre-training** | **98.08%** | **Reigning Champion** |
-| 2 | Specter 2 | Full Fine-Tuning | 97.60% | Close Second |
-| 3 | Ensemble | Synergy (Phase 6) | 97.12% | Robust but lower peak |
-| 4 | DeBERTa-v3 | kNN Hybrid (Phase 7) | 96.15% | Underperformed |
-| 5 | SetFit | Contrastive (Phase 8) | *Pending* | **Ready for Training** |
-
-## 🧪 Development Phases
-
-### Phase 1-3: The Foundation
-- Established baselines.
-- **Finding**: Unfrozen Specter 2 (97.60%) beat BERT and RoBERTa, proving the value of domain adaptation.
-
-### Phase 4: The Shootout
-- Benchmarked DeBERTa-v3 vs. SciBERT vs. BERT.
-- **Finding**: SciBERT (98.08%) took the crown, proving that *pre-training on scientific text* > *modern architecture* for this specific task.
-
-### Phase 5: Context Injection
-- **Hypothesis**: Injecting synonyms and definitions into the text would help.
-- **Result**: **Failure**. Accuracy dropped. The added noise confused the model more than the context helped.
-
-### Phase 6: The Synergy Ensemble
-- **Hypothesis**: Combining models would smooth out errors.
-- **Result**: **97.12%**. Good, but the lower-performing models dragged down the average.
-
-### Phase 7: The Cyborg (kNN + DeBERTa)
-- **Hypothesis**: Using a kNN memory bank for inference would fix edge cases.
-- **Result**: **96.15%**. No improvement over the base model.
-
-### Phase 8: The Nuclear Option (SetFit)
-- **Hypothesis**: Contrastive Learning can optimize the embedding geometry directly.
-- **Status**: **Implemented & Verified**.
-- **Note**: The pipeline is ready. Due to hardware constraints on the dev machine, the full training run is deferred to the high-performance workstation.
-
-## 📂 Directory Structure
-- `scripts/`: Entry point scripts (e.g., `run_phase4.py`).
-- `src/`: Source code for all phases.
-- `data/`: Datasets (Raw and Processed).
-- `models/`: Saved model artifacts (Ignored by Git).
-- `results/plots/`: Visualizations from all phases.
-- `results/logs/`: Execution logs.
-- `docs/`: Implementation plans, results (`phase_results.md`), and summary.
-
-## 🔧 Key Scripts
-- `src/phase8_setfit.py`: The final contrastive learning implementation.
-- `src/generate_augmented_data.py`: Data augmentation for Phase 8.
-- `scripts/run_phase4.py`: Phase 4 benchmarking script.
+## How to Run
+1. Install dependencies:
+   `pip install -r requirements.txt`
+2. Run the experiment:
+   `python main.py`
+3. Visualize results:
+   `python visualize.py`

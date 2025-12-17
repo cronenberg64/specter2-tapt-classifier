@@ -5,7 +5,7 @@ import seaborn as sns
 from sklearn.manifold import TSNE
 from sentence_transformers import SentenceTransformer
 from datasets import load_dataset
-from src.config import Config
+from config import Config
 
 def visualize_fair_duel():
     print("--- GENERATING PHASE 8 VISUALIZATIONS ---")
@@ -47,7 +47,7 @@ def visualize_fair_duel():
             print(f"Skipping {name}: {e}")
 
     plt.tight_layout()
-    plt.savefig("phase8_clash_of_titans.png")
+    plt.savefig("results/figures/clash_of_titans.png")
     print("Saved comparison plot to phase8_clash_of_titans.png")
 
 if __name__ == "__main__":

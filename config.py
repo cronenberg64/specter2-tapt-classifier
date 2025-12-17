@@ -7,7 +7,7 @@ class Config:
     import os
     
     # Project Root (calculated dynamically)
-    PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+    PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
     
     # Paths
     DATA_PATH = os.path.join(PROJECT_ROOT, "data/raw/scientific_abstracts_dataset.csv")
