@@ -1,0 +1,17 @@
+{
+    "ensemble_accuracy": 0.9759615384615384,
+    "top_models": [
+        {
+            "model": "google-bert/bert-base-uncased",
+            "accuracy": 0.9807692307692307,
+            "f1": 0.9807692307692307,
+            "path": "C:\\Users\\user\\Documents\\GitHub\\temp\\specter2-tapt-classifier\\models/phase4_shootout\\bert-base-uncased"
+        },
+        {
+            "model": "allenai/scibert_scivocab_uncased",
+            "accuracy": 0.9711538461538461,
+            "f1": 0.971281322843823,
+            "path": "C:\\Users\\user\\Documents\\GitHub\\temp\\specter2-tapt-classifier\\models/phase4_shootout\\scibert_scivocab_uncased"
+        }
+    ]
+}

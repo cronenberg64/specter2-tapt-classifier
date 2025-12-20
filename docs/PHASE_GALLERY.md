@@ -8,6 +8,14 @@ This document serves as a visual storyboard for the entire project, mapping each
 
 ![Phase 1 Model Comparison](../results/figures/phase1_model_comparison.png)
 
+**Baseline Latent Space (t-SNE):**
+Shows how the models initially separated the three scientific domains before advanced tuning.
+![Phase 1 Clusters](../results/figures/phase1_baseline_clusters.png)
+
+**Domain Jargon Analysis:**
+Top 10 unique keywords identified by TF-IDF for each category, defining the "Vocabulary Gap" we aim to bridge.
+![Phase 1 Jargon](../results/figures/phase1_domain_jargon.png)
+
 **Detailed Confusion Matrices:**
 ````carousel
 ![BERT Baseline](../results/figures/phase1_confusion_matrix_bert.png)
@@ -21,49 +29,88 @@ This document serves as a visual storyboard for the entire project, mapping each
 
 ## Phase 2: The Experimentation Suite
 **Objective:** Conduct an ablation study to quantify the impact of TAPT and Layer Freezing.
-**Result:** Final Experiment Results (JSON Data)
+**Result:** Comparative Performance & Ablation Analysis
+
+**Experiment Benchmark & Efficiency:**
+````carousel
+![Phase 2 Performance Benchmarks](../results/figures/phase2_performance_benchmark.png)
+<!-- slide -->
+![Ablation Study: Base vs. TAPT vs. Unfrozen](../results/figures/phase2_ablation_study.png)
+<!-- slide -->
+![Data Efficiency Test](../results/figures/phase2_data_efficiency.png)
+````
+
+**Latent Space Reorganization (t-SNE):**
+Visualization of how TAPT improved domain separation compared to the Base model.
+![Phase 2 Clusters](../results/figures/phase2_latent_clusters.png)
 
 ```json
 [
     {
         "experiment": "Exp_1_Specter_Base_Frozen",
-        "accuracy": 0.9320,
+        "accuracy": 0.9567,
         "note": "Baseline: Does Specter work without our innovation?"
     },
     {
         "experiment": "Exp_2_Specter_TAPT_Frozen",
-        "accuracy": 0.9470,
+        "accuracy": 0.9615,
         "note": "Our Current Best: Does TAPT help?"
     },
     {
-        "experiment": "Exp_3_Specter_TAPT_Top2",
-        "accuracy": 0.9780,
-        "note": "The Challenger: Can we beat BERT by unfreezing slightly?"
+        "experiment": "Exp_4_LowData_Specter",
+        "accuracy": 0.7403,
+        "note": "Efficiency Check: 10% data only"
     }
 ]
 ```
-*(Data sourced from `results/phase2_experiment_results.json`)*
+*(Full results in `results/phase2_experiment_results.json`)*
 
 ---
 
 ## Phase 3: The "Beat BERT" Suite
 **Objective:** Push Specter performance using Full Fine-Tuning and SetFit to surpass the BERT baseline.
-**Result:** High-Accuracy Metrics
+**Result:** Benchmarking & Classification Efficiency
 
-| Model Strategy | Accuracy |
-| :--- | :--- |
-| **Specter SetFit** | **98.5%** |
-| Specter Full Fine-Tune | 97.8% |
+**Leaderboard & Throughput:**
+````carousel
+![Phase 3 Benchmark: Accuracy Leaderboard](../results/figures/phase3_beat_bert_benchmark.png)
+<!-- slide -->
+![Training Efficiency (Samples/Sec)](../results/figures/phase3_training_efficiency.png)
+````
+
+
+**Latent Space Quality (t-SNE):**
+Visualizing how fine-tuning refines the embedding space for better classification.
+*(Note: ModernBERT omitted due to architectural incompatibility with visualization tools)*
+![Phase 3 Clusters](../results/figures/phase3_latent_clusters.png)
+
+| Model Strategy | Accuracy | Samples/Sec |
+| :--- | :--- | :--- |
+| **Specter Full Fine-Tune** | **97.6%** | **102.2** |
+| ModernBERT | 96.2% | 55.3 |
 
 *(Data derived from `results/phase3_specter_results.json`)*
 
 ---
 
-## Phase 4: "The Grandmaster" (Ensemble)
-**Objective:** Prove that the winning model (SciBERT/Specter) creates better decision boundaries than generalist models.
-**Result:** Cluster Comparison T-SNE
+## Phase 4: "The Grandmaster Protocol"
+**Objective:** Conduct a ruthless "Shootout" between the accuracy kings (BERT, SciBERT) and unify them into a "Super-Model" Ensemble.
 
-![Phase 4 Cluster Comparison](../results/figures/phase4_cluster_comparison.png)
+**The Shootout Results:**
+````carousel
+![The Shootout Leaderboard](../results/figures/phase4_shootout_leaderboard.png)
+<!-- slide -->
+![Ensemble Impact Analysis](../results/figures/phase4_ensemble_gain.png)
+<!-- slide -->
+![Cluster Quality: Deep Dive](../results/figures/phase4_cluster_comparison.png)
+````
+
+**Key Findings:**
+- **The King:** BERT-Base (98.1%) took the crown, surprisingly beating the domain expert SciBERT (97.1%).
+- **Ensemble Effect:** Soft Voting achieved 97.6%, providing a stable consensus but slightly lagging behind the peak single model.
+- **Latent Space:** Both models show excellent class separation, proving they are ready for production.
+
+*(Full results in `results/phase4_leaderboard.json` and `results/phase4_ensemble_result.json`)*
 
 ---
 

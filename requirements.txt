@@ -8,3 +8,4 @@ sentence-transformers
 datasets
 accelerate
 huggingface_hub
+nltk
