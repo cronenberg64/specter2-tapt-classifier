@@ -20,7 +20,7 @@ Despite being 3x smaller, the domain-specific model won.
 **Conclusion:** Domain pre-training provides better conceptual separation for scientific jargon than raw parameter scale.
 
 ## Visualization
-![Latent Space Visualization](results/figures/cluster_compare_final.png)
+![Latent Space Visualization](results/figures/phase8_final_cluster.png)
 *Left: SciBERT shows distinct, dense clusters. Right: BERT-Large shows slightly fuzzier boundaries.*
 
 ## How to Run
