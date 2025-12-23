@@ -9,3 +9,5 @@ datasets
 accelerate
 huggingface_hub
 nltk
+pyvis
+scipy

@@ -4,6 +4,7 @@ from datasets import Dataset
 from transformers import AutoModelForSequenceClassification, AutoTokenizer, Trainer, TrainingArguments
 from sklearn.preprocessing import LabelEncoder
 from sklearn.metrics import accuracy_score, f1_score
+import torch
 import os
 import sys
 
@@ -35,7 +36,7 @@ def run_contextual_training():
     df["label"] = LabelEncoder().fit_transform(df["label"])
     dataset = Dataset.from_pandas(df).train_test_split(test_size=0.2, seed=Config.SEED)
     
-    model_name = "google-bert/bert-base-uncased"
+    model_name = "microsoft/deberta-v3-base"
     tokenizer = AutoTokenizer.from_pretrained(model_name, use_fast=False)
     
     def compute_metrics(pred):
@@ -75,6 +76,7 @@ def run_contextual_training():
 
     print("Injecting domain associations into inputs...")
     tokenized_datasets = dataset.map(inject_context, batched=True)
+    tokenized_datasets = tokenized_datasets.remove_columns(["text"])
     
     # 3. Train DeBERTa (Standard Setup)
     model = AutoModelForSequenceClassification.from_pretrained(model_name, num_labels=3)
@@ -87,7 +89,8 @@ def run_contextual_training():
         evaluation_strategy="epoch",
         save_strategy="epoch",
         load_best_model_at_end=True,
-        report_to="none"
+        report_to="none",
+        fp16=torch.cuda.is_available()
     )
     
     trainer = Trainer(
