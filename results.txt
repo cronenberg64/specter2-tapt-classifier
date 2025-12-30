@@ -1,0 +1,194 @@
+(venv) PS C:\Users\user\Documents\GitHub\temp\specter2-tapt-classifier> python -u JonathanSetiawan_aifinal.py
+====================================================
+   AI2025 FINAL ASSIGNMENT: SCIENTIFIC CLASSIFIER   
+====================================================
+
+Execution Device: cuda
+Loading data from data/processed/phase5_augmented_dataset.csv...
+Data loaded successfully. Total samples: 2074
+Classes found: ['Bioinformatics', 'Materials Science', 'Neuroscience']
+
+--- Training Fold 1/5 ---
+No sentence-transformers model found with name allenai/scibert_scivocab_uncased. Creating a new one with mean pooling.
+model_head.pkl not found on HuggingFace Hub, initialising classification head with random weights. You should TRAIN this model on a downstream task to use it for predictions and inference.
+C:\Users\user\Documents\GitHub\temp\specter2-tapt-classifier\JonathanSetiawan_aifinal.py:96: DeprecationWarning: `SetFitTrainer` has been deprecated and will be removed in v2.0.0 of SetFit. Please use `Trainer` instead.
+  trainer = SetFitTrainer(
+Applying column mapping to the training dataset
+Applying column mapping to the evaluation dataset
+Map: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████| 1659/1659 [00:00<00:00, 15301.65 examples/s]
+***** Running training *****
+  Num unique pairs = 9954
+  Batch size = 16
+  Num epochs = 1
+{'embedding_loss': 0.2517, 'grad_norm': 0.5382652878761292, 'learning_rate': 3.174603174603175e-07, 'epoch': 0.0}
+{'embedding_loss': 0.21, 'grad_norm': 0.879055380821228, 'learning_rate': 1.5873015873015872e-05, 'epoch': 0.08}                                                
+{'embedding_loss': 0.0512, 'grad_norm': 1.6477506160736084, 'learning_rate': 1.867857142857143e-05, 'epoch': 0.16}                                              
+{'embedding_loss': 0.0416, 'grad_norm': 0.6165943145751953, 'learning_rate': 1.6892857142857143e-05, 'epoch': 0.24}                                             
+{'embedding_loss': 0.0277, 'grad_norm': 1.7984952926635742, 'learning_rate': 1.5107142857142858e-05, 'epoch': 0.32}                                             
+{'embedding_loss': 0.0251, 'grad_norm': 0.11324813961982727, 'learning_rate': 1.3321428571428571e-05, 'epoch': 0.4}                                             
+{'embedding_loss': 0.0182, 'grad_norm': 1.2593815326690674, 'learning_rate': 1.1535714285714286e-05, 'epoch': 0.48}                                             
+{'embedding_loss': 0.0149, 'grad_norm': 1.7654534578323364, 'learning_rate': 9.75e-06, 'epoch': 0.56}                                                           
+{'embedding_loss': 0.0139, 'grad_norm': 1.5123578310012817, 'learning_rate': 7.964285714285715e-06, 'epoch': 0.64}                                              
+{'embedding_loss': 0.0064, 'grad_norm': 0.02086135745048523, 'learning_rate': 6.178571428571429e-06, 'epoch': 0.72}                                             
+{'embedding_loss': 0.0133, 'grad_norm': 0.0491451695561409, 'learning_rate': 4.392857142857143e-06, 'epoch': 0.8}                                               
+{'embedding_loss': 0.0071, 'grad_norm': 0.020635152235627174, 'learning_rate': 2.6071428571428575e-06, 'epoch': 0.88}
+{'embedding_loss': 0.0061, 'grad_norm': 0.008869239129126072, 'learning_rate': 8.214285714285715e-07, 'epoch': 0.96}                                            
+{'train_runtime': 3382.3695, 'train_samples_per_second': 2.943, 'train_steps_per_second': 0.184, 'train_loss': 0.03551220434626645, 'epoch': 1.0}               
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 623/623 [56:22<00:00,  5.43s/it] 
+***** Running evaluation *****
+Saving final model to models/final_submission_model...
+
+--- Training Fold 2/5 ---
+No sentence-transformers model found with name allenai/scibert_scivocab_uncased. Creating a new one with mean pooling.
+model_head.pkl not found on HuggingFace Hub, initialising classification head with random weights. You should TRAIN this model on a downstream task to use it for predictions and inference.
+C:\Users\user\Documents\GitHub\temp\specter2-tapt-classifier\JonathanSetiawan_aifinal.py:96: DeprecationWarning: `SetFitTrainer` has been deprecated and will be removed in v2.0.0 of SetFit. Please use `Trainer` instead.
+  trainer = SetFitTrainer(
+Applying column mapping to the training dataset
+Applying column mapping to the evaluation dataset
+Map: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████| 1659/1659 [00:00<00:00, 10690.93 examples/s]
+***** Running training *****
+  Num unique pairs = 9954
+  Batch size = 16
+  Num epochs = 1
+{'embedding_loss': 0.2363, 'grad_norm': 0.7307605147361755, 'learning_rate': 3.174603174603175e-07, 'epoch': 0.0}
+{'embedding_loss': 0.21, 'grad_norm': 3.350755214691162, 'learning_rate': 1.5873015873015872e-05, 'epoch': 0.08}                                                
+{'embedding_loss': 0.0529, 'grad_norm': 2.9533588886260986, 'learning_rate': 1.867857142857143e-05, 'epoch': 0.16}                                              
+{'embedding_loss': 0.0377, 'grad_norm': 0.2803748548030853, 'learning_rate': 1.6892857142857143e-05, 'epoch': 0.24}                                             
+{'embedding_loss': 0.037, 'grad_norm': 0.2919065058231354, 'learning_rate': 1.5107142857142858e-05, 'epoch': 0.32}                                              
+{'embedding_loss': 0.0181, 'grad_norm': 0.22964762151241302, 'learning_rate': 1.3321428571428571e-05, 'epoch': 0.4}                                             
+{'embedding_loss': 0.0219, 'grad_norm': 1.1069954633712769, 'learning_rate': 1.1535714285714286e-05, 'epoch': 0.48}                                             
+{'embedding_loss': 0.0126, 'grad_norm': 0.07520008832216263, 'learning_rate': 9.75e-06, 'epoch': 0.56}                                                          
+{'embedding_loss': 0.0085, 'grad_norm': 1.285314917564392, 'learning_rate': 7.964285714285715e-06, 'epoch': 0.64}                                               
+{'embedding_loss': 0.0176, 'grad_norm': 0.04432818293571472, 'learning_rate': 6.178571428571429e-06, 'epoch': 0.72}                                             
+{'embedding_loss': 0.0068, 'grad_norm': 0.07001844793558121, 'learning_rate': 4.392857142857143e-06, 'epoch': 0.8}                                              
+{'embedding_loss': 0.0017, 'grad_norm': 0.05739147588610649, 'learning_rate': 2.6071428571428575e-06, 'epoch': 0.88}                                            
+{'embedding_loss': 0.0097, 'grad_norm': 0.2616908848285675, 'learning_rate': 8.214285714285715e-07, 'epoch': 0.96}                                              
+{'train_runtime': 5543.8342, 'train_samples_per_second': 1.796, 'train_steps_per_second': 0.112, 'train_loss': 0.0350691420212986, 'epoch': 1.0}                
+100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 623/623 [1:32:23<00:00,  8.90s/it] 
+***** Running evaluation *****
+
+--- Training Fold 3/5 ---
+No sentence-transformers model found with name allenai/scibert_scivocab_uncased. Creating a new one with mean pooling.
+model_head.pkl not found on HuggingFace Hub, initialising classification head with random weights. You should TRAIN this model on a downstream task to use it for predictions and inference.
+C:\Users\user\Documents\GitHub\temp\specter2-tapt-classifier\JonathanSetiawan_aifinal.py:96: DeprecationWarning: `SetFitTrainer` has been deprecated and will be removed in v2.0.0 of SetFit. Please use `Trainer` instead.
+  trainer = SetFitTrainer(
+Applying column mapping to the training dataset
+Applying column mapping to the evaluation dataset
+Map: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████| 1659/1659 [00:00<00:00, 15080.82 examples/s]
+***** Running training *****
+  Num unique pairs = 9954
+  Batch size = 16
+  Num epochs = 1
+{'embedding_loss': 0.2495, 'grad_norm': 0.5421803593635559, 'learning_rate': 3.174603174603175e-07, 'epoch': 0.0}
+{'embedding_loss': 0.2079, 'grad_norm': 1.2673619985580444, 'learning_rate': 1.5873015873015872e-05, 'epoch': 0.08}                                             
+{'embedding_loss': 0.0741, 'grad_norm': 1.6498303413391113, 'learning_rate': 1.867857142857143e-05, 'epoch': 0.16}                                              
+{'embedding_loss': 0.0365, 'grad_norm': 1.0252752304077148, 'learning_rate': 1.6892857142857143e-05, 'epoch': 0.24}                                             
+{'embedding_loss': 0.0226, 'grad_norm': 0.9827333092689514, 'learning_rate': 1.5107142857142858e-05, 'epoch': 0.32}                                             
+{'embedding_loss': 0.021, 'grad_norm': 1.7540395259857178, 'learning_rate': 1.3321428571428571e-05, 'epoch': 0.4}                                               
+{'embedding_loss': 0.0136, 'grad_norm': 6.789488792419434, 'learning_rate': 1.1535714285714286e-05, 'epoch': 0.48}
+{'embedding_loss': 0.0104, 'grad_norm': 0.04923851042985916, 'learning_rate': 9.75e-06, 'epoch': 0.56}                                                          
+{'embedding_loss': 0.001, 'grad_norm': 0.20171388983726501, 'learning_rate': 7.964285714285715e-06, 'epoch': 0.64}                                              
+{'embedding_loss': 0.0005, 'grad_norm': 0.0245278961956501, 'learning_rate': 6.178571428571429e-06, 'epoch': 0.72}                                              
+{'embedding_loss': 0.0098, 'grad_norm': 0.06781835854053497, 'learning_rate': 4.392857142857143e-06, 'epoch': 0.8}                                              
+{'embedding_loss': 0.0027, 'grad_norm': 0.009510358795523643, 'learning_rate': 2.6071428571428575e-06, 'epoch': 0.88}                                           
+{'embedding_loss': 0.0027, 'grad_norm': 0.019112171605229378, 'learning_rate': 8.214285714285715e-07, 'epoch': 0.96}                                            
+{'train_runtime': 3152.3627, 'train_samples_per_second': 3.158, 'train_steps_per_second': 0.198, 'train_loss': 0.03276576422286455, 'epoch': 1.0}               
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 623/623 [52:32<00:00,  5.06s/it] 
+***** Running evaluation *****
+
+--- Training Fold 4/5 ---
+No sentence-transformers model found with name allenai/scibert_scivocab_uncased. Creating a new one with mean pooling.
+model_head.pkl not found on HuggingFace Hub, initialising classification head with random weights. You should TRAIN this model on a downstream task to use it for predictions and inference.
+C:\Users\user\Documents\GitHub\temp\specter2-tapt-classifier\JonathanSetiawan_aifinal.py:96: DeprecationWarning: `SetFitTrainer` has been deprecated and will be removed in v2.0.0 of SetFit. Please use `Trainer` instead.
+ removed in v2.0.0 of SetFit. Please use `Trainer` instead.
+ removed in v2.0.0 of SetFit. Please use `Trainer` instead.
+ removed in v2.0.0 of SetFit. Please use `Trainer` instead.
+ removed in v2.0.0 of SetFit. Please use `Trainer` instead.
+ removed in v2.0.0 of SetFit. Please use `Trainer` instead.
+ removed in v2.0.0 of SetFit. Please use `Trainer` instead.
+  trainer = SetFitTrainer(
+Applying column mapping to the training dataset
+Applying column mapping to the evaluation dataset
+Map: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████| 1659/1659 [00:00<00:00, 11655.22 examples/s] 
+***** Running training *****
+  Num unique pairs = 9954
+  Batch size = 16
+  Num epochs = 1
+{'embedding_loss': 0.2417, 'grad_norm': 0.6475980281829834, 'learning_rate': 3.174603174603175e-07, 'epoch': 0.0}
+{'embedding_loss': 0.2119, 'grad_norm': 3.3687820434570312, 'learning_rate': 1.5873015873015872e-05, 'epoch': 0.08}
+{'embedding_loss': 0.057, 'grad_norm': 1.9250849485397339, 'learning_rate': 1.867857142857143e-05, 'epoch': 0.16}                                               
+{'embedding_loss': 0.0473, 'grad_norm': 0.47055891156196594, 'learning_rate': 1.6892857142857143e-05, 'epoch': 0.24}
+{'embedding_loss': 0.0264, 'grad_norm': 2.526618480682373, 'learning_rate': 1.5107142857142858e-05, 'epoch': 0.32}
+{'embedding_loss': 0.0274, 'grad_norm': 0.42620986700057983, 'learning_rate': 1.3321428571428571e-05, 'epoch': 0.4}
+{'embedding_loss': 0.0182, 'grad_norm': 0.3468456268310547, 'learning_rate': 1.1535714285714286e-05, 'epoch': 0.48}
+{'embedding_loss': 0.0121, 'grad_norm': 0.006671889219433069, 'learning_rate': 9.75e-06, 'epoch': 0.56}                                                         
+{'embedding_loss': 0.0123, 'grad_norm': 0.3322087526321411, 'learning_rate': 7.964285714285715e-06, 'epoch': 0.64}                                              
+{'embedding_loss': 0.0056, 'grad_norm': 0.029873395338654518, 'learning_rate': 6.178571428571429e-06, 'epoch': 0.72}                                            
+{'embedding_loss': 0.0099, 'grad_norm': 0.03512921556830406, 'learning_rate': 4.392857142857143e-06, 'epoch': 0.8}                                              
+{'embedding_loss': 0.0097, 'grad_norm': 0.36570069193840027, 'learning_rate': 2.6071428571428575e-06, 'epoch': 0.88}                                            
+{'embedding_loss': 0.004, 'grad_norm': 0.01321250107139349, 'learning_rate': 8.214285714285715e-07, 'epoch': 0.96}                                              
+{'train_runtime': 907.3798, 'train_samples_per_second': 10.97, 'train_steps_per_second': 0.687, 'train_loss': 0.035794352499669474, 'epoch': 1.0}               
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 623/623 [15:07<00:00,  1.46s/it] 
+***** Running evaluation *****
+
+--- Training Fold 5/5 ---
+No sentence-transformers model found with name allenai/scibert_scivocab_uncased. Creating a new one with mean pooling.
+model_head.pkl not found on HuggingFace Hub, initialising classification head with random weights. You should TRAIN this model on a downstream task to use it for predictions and inference.
+C:\Users\user\Documents\GitHub\temp\specter2-tapt-classifier\JonathanSetiawan_aifinal.py:96: DeprecationWarning: `SetFitTrainer` has been deprecated and will be removed in v2.0.0 of SetFit. Please use `Trainer` instead.
+  trainer = SetFitTrainer(
+Applying column mapping to the training dataset
+Applying column mapping to the evaluation dataset
+Map: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████| 1660/1660 [00:00<00:00, 12083.91 examples/s]
+***** Running training *****
+  Num unique pairs = 9960
+  Batch size = 16
+  Num epochs = 1
+{'embedding_loss': 0.1887, 'grad_norm': 0.5014824271202087, 'learning_rate': 3.174603174603175e-07, 'epoch': 0.0}
+{'embedding_loss': 0.2113, 'grad_norm': 1.5966068506240845, 'learning_rate': 1.5873015873015872e-05, 'epoch': 0.08}
+{'embedding_loss': 0.0481, 'grad_norm': 0.9339081645011902, 'learning_rate': 1.867857142857143e-05, 'epoch': 0.16}
+  Num epochs = 1
+{'embedding_loss': 0.1887, 'grad_norm': 0.5014824271202087, 'learning_rate': 3.174603174603175e-07, 'epoch': 0.0}
+{'embedding_loss': 0.2113, 'grad_norm': 1.5966068506240845, 'learning_rate': 1.5873015873015872e-05, 'epoch': 0.08}
+{'embedding_loss': 0.0481, 'grad_norm': 0.9339081645011902, 'learning_rate': 1.867857142857143e-05, 'epoch': 0.16}
+{'embedding_loss': 0.0352, 'grad_norm': 0.05107085779309273, 'learning_rate': 1.6892857142857143e-05, 'epoch': 0.24}
+{'embedding_loss': 0.0433, 'grad_norm': 0.5696509480476379, 'learning_rate': 1.5107142857142858e-05, 'epoch': 0.32}
+{'embedding_loss': 0.0421, 'grad_norm': 0.14348115026950836, 'learning_rate': 1.3321428571428571e-05, 'epoch': 0.4}
+{'embedding_loss': 0.0162, 'grad_norm': 1.031398892402649, 'learning_rate': 1.1535714285714286e-05, 'epoch': 0.48}
+{'embedding_loss': 0.0129, 'grad_norm': 0.04574497044086456, 'learning_rate': 9.75e-06, 'epoch': 0.56}
+{'embedding_loss': 0.0137, 'grad_norm': 0.012267864309251308, 'learning_rate': 7.964285714285715e-06, 'epoch': 0.64}
+{'embedding_loss': 0.0127, 'grad_norm': 0.036857713013887405, 'learning_rate': 6.178571428571429e-06, 'epoch': 0.72}
+{'embedding_loss': 0.0158, 'grad_norm': 0.008585067465901375, 'learning_rate': 4.392857142857143e-06, 'epoch': 0.8}
+{'embedding_loss': 0.0146, 'grad_norm': 0.017578857019543648, 'learning_rate': 2.6071428571428575e-06, 'epoch': 0.88}
+{'embedding_loss': 0.0126, 'grad_norm': 0.2605017125606537, 'learning_rate': 8.214285714285715e-07, 'epoch': 0.96}
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▊| 622/623 [1:45:56<00:11, 11.62s/it] {'train_runtime': 6364.1937, 'train_samples_per_second': 1.565, 'train_steps_per_second': 0.098, 'train_loss': 0.03907349325393597, 'epoch': 1.0}
+100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 623/623 [1:46:04<00:00, 10.22s/it] 
+***** Running evaluation *****
+
+========================================
+         FINAL PERFORMANCE REPORT
+========================================
+
+K-Fold Cross-Validation Results (k=5):
+Mean Accuracy: 0.9759 (+/- 0.0082)
+
+Detailed Classification Report:
+                   precision    recall  f1-score   support
+
+   Bioinformatics       0.96      0.97      0.96       700
+Materials Science       1.00      0.99      1.00       700
+     Neuroscience       0.97      0.96      0.97       674
+
+         accuracy                           0.98      2074
+        macro avg       0.98      0.98      0.98      2074
+     weighted avg       0.98      0.98      0.98      2074
+
+
+Generating Visualizations...
+Confusion matrix saved to results/figures\final_confusion_matrix.png
+Class performance plot saved to results/figures\final_class_performance.png
+Generating t-SNE cluster visualization...
+t-SNE plot saved to results/figures\final_tsne_clusters.png
+
+Assignment Requirements Fulfilled.
+Jonathan Setiawan - AI2025 Final
+(venv) PS C:\Users\user\Documents\GitHub\temp\specter2-tapt-classifier> 
