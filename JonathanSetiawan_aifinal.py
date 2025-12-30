@@ -15,6 +15,7 @@ import seaborn as sns
 from sklearn.model_selection import KFold
 from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
 from sklearn.preprocessing import LabelEncoder
+from sklearn.manifold import TSNE
 from datasets import Dataset
 from setfit import SetFitModel, SetFitTrainer
 from sentence_transformers.losses import CosineSimilarityLoss
@@ -139,6 +140,83 @@ def plot_confusion_matrix(y_true, y_pred, target_names, save_path):
     print(f"Confusion matrix saved to {save_path}")
     plt.close()
 
+def plot_class_performance(report_dict, save_path):
+    """
+    Generates a bar chart comparing Precision, Recall, and F1-score for each class.
+    
+    Args:
+        report_dict (dict): Classification report dictionary.
+        save_path (str): Where to save the generated figure.
+    """
+    classes = [k for k in report_dict.keys() if k not in ['accuracy', 'macro avg', 'weighted avg']]
+    metrics = ['precision', 'recall', 'f1-score']
+    
+    data = []
+    for cls in classes:
+        for metric in metrics:
+            data.append({
+                'Class': cls,
+                'Metric': metric.capitalize(),
+                'Score': report_dict[cls][metric]
+            })
+            
+    df_plot = pd.DataFrame(data)
+    
+    plt.figure(figsize=(12, 6))
+    sns.barplot(x='Class', y='Score', hue='Metric', data=df_plot, palette='viridis')
+    plt.title('Model Performance by Class')
+    plt.ylim(0, 1.1)
+    plt.grid(axis='y', linestyle='--', alpha=0.7)
+    plt.legend(loc='lower right')
+    plt.savefig(save_path)
+    print(f"Class performance plot saved to {save_path}")
+    plt.close()
+
+def plot_tsne_clusters(model_path, df, le, save_path, n_samples=1000):
+    """
+    Generates a t-SNE visualization of the model's embeddings.
+    
+    This shows how well the model separates the different scientific domains
+    in its latent space.
+    
+    Args:
+        model_path (str): Path to the saved SetFit model.
+        df (pd.DataFrame): Dataframe containing text and labels.
+        le (LabelEncoder): Label encoder for class names.
+        save_path (str): Where to save the generated figure.
+        n_samples (int): Number of samples to plot (to avoid clutter).
+    """
+    print("Generating t-SNE cluster visualization...")
+    
+    # Load model
+    model = SetFitModel.from_pretrained(model_path)
+    
+    # Sample data
+    if len(df) > n_samples:
+        df_sample = df.sample(n=n_samples, random_state=42)
+    else:
+        df_sample = df
+        
+    texts = df_sample['text'].tolist()
+    labels = df_sample['label_idx'].values
+    class_names = le.inverse_transform(labels)
+    
+    # Encode
+    embeddings = model.encode(texts)
+    
+    # t-SNE
+    tsne = TSNE(n_components=2, random_state=42, perplexity=30, init='pca', learning_rate='auto')
+    X_2d = tsne.fit_transform(embeddings)
+    
+    # Plot
+    plt.figure(figsize=(12, 8))
+    sns.scatterplot(x=X_2d[:,0], y=X_2d[:,1], hue=class_names, palette='deep', s=60, edgecolor='k')
+    plt.title('t-SNE Visualization of Scientific Abstract Embeddings')
+    plt.legend(title='Domain')
+    plt.savefig(save_path)
+    print(f"t-SNE plot saved to {save_path}")
+    plt.close()
+
 def main():
     """
     Main execution pipeline for the AI Final Assignment.
@@ -191,9 +269,23 @@ def main():
     print("\nDetailed Classification Report:")
     print(classification_report(all_trues, all_preds, target_names=le.classes_))
     
-    # 5. Confusion Matrix Visualization
+    # Generate report dict for visualization
+    report_dict = classification_report(all_trues, all_preds, target_names=le.classes_, output_dict=True)
+    
+    # 5. Visualizations
+    print("\nGenerating Visualizations...")
+    
+    # Confusion Matrix
     plot_confusion_matrix(all_trues, all_preds, le.classes_, 
                          os.path.join(FIGURES_DIR, "final_confusion_matrix.png"))
+                         
+    # Class Performance
+    plot_class_performance(report_dict, 
+                          os.path.join(FIGURES_DIR, "final_class_performance.png"))
+                          
+    # t-SNE Clusters (using the saved best model)
+    plot_tsne_clusters(OUTPUT_DIR, df, le, 
+                      os.path.join(FIGURES_DIR, "final_tsne_clusters.png"))
     
     print("\nAssignment Requirements Fulfilled.")
     print("Jonathan Setiawan - AI2025 Final")
