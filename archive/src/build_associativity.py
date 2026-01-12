@@ -4,14 +4,23 @@ import numpy as np
 import json
 import nltk
 from nltk.corpus import wordnet
-import sys
 import os
-# Add project root to sys.path to allow running script directly
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+import sys
+
+# Add root to path for config
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+try:
+    from config import Config
+    DATA_PATH = Config.DATA_PATH
+except ImportError:
+    DATA_PATH = "data/raw/scientific_abstracts_dataset.csv"
 
 # Ensure we have the dictionary downloaded
-nltk.download('wordnet')
-nltk.download('omw-1.4')
+try:
+    nltk.data.find('corpora/wordnet.zip')
+except LookupError:
+    nltk.download('wordnet')
+    nltk.download('omw-1.4')
 
 def get_synonyms(word):
     """Fetches top 3 unique synonyms for a word using WordNet."""
@@ -27,7 +36,11 @@ def build_associativity_map():
     print("--- BUILDING DOMAIN ASSOCIATIVITY MAP (TF-IDF) ---")
     
     # 1. Load Data
-    df = pd.read_csv("data/raw/scientific_abstracts_dataset.csv")
+    if not os.path.exists(DATA_PATH):
+        print(f"Error: Data file {DATA_PATH} not found.")
+        return
+
+    df = pd.read_csv(DATA_PATH)
     
     # 2. Group text by Domain (Label) to find domain-specific jargon
     domain_text = df.groupby('label')['text'].apply(lambda x: " ".join(x)).reset_index()
@@ -46,12 +59,13 @@ def build_associativity_map():
         
         # Get the highest scoring words for this domain
         domain_scores = matrix[i].toarray()[0]
+        # Get indices of top scores
         top_indices = domain_scores.argsort()[-60:][::-1] # Top 60 words
         
         top_words = feature_names[top_indices]
         
         for word in top_words:
-            # Only add if not already assigned to another domain (or overwrite if score is higher)
+            # Only add if not already assigned to another domain (or overwrite if score is higher - simplified here)
             if word not in associativity_map:
                 associativity_map[word] = {
                     "domain": domain,
@@ -59,11 +73,8 @@ def build_associativity_map():
                 }
             
     # 4. Save the Map
-    # Need to import Config here or just use absolute path logic if Config is not imported.
-    # Since Config is not imported in the original script, let's just use os.path logic or import Config.
-    # Importing Config is cleaner.
-    from src.config import Config
-    output_path = Config.ASSOCIATIVITY_MAP_PATH
+    if not os.path.exists("data"): os.makedirs("data")
+    output_path = "data/associativity_map.json"
     with open(output_path, "w") as f:
         json.dump(associativity_map, f, indent=4)
         

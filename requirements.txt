@@ -4,10 +4,9 @@ numpy
 scikit-learn
 matplotlib
 seaborn
+setfit
 sentence-transformers
 datasets
 accelerate
 huggingface_hub
 nltk
-pyvis
-scipy

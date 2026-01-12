@@ -7,13 +7,8 @@ from nltk.corpus import wordnet
 import os
 import sys
 
-# Add root to path for config
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-try:
-    from config import Config
-    DATA_PATH = Config.DATA_PATH
-except ImportError:
-    DATA_PATH = "data/raw/scientific_abstracts_dataset.csv"
+# Hardcoded path for independence
+DATA_PATH = "data/raw/scientific_abstracts_dataset.csv"
 
 # Ensure we have the dictionary downloaded
 try:

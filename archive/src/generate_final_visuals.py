@@ -14,7 +14,7 @@ from sklearn.manifold import TSNE
 from setfit import SetFitModel
 
 # --- CONFIGURATION ---
-DATA_PATH = "data/processed/phase5_augmented_dataset.csv"
+DATA_PATH = "data/processed/augmented_dataset.csv"
 MODEL_PATH = "models/final_submission_model"
 FIGURES_DIR = "results/figures"
 

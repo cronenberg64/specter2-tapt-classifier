@@ -1,36 +1,50 @@
 import json
 import pandas as pd
-import numpy as np
 from datasets import Dataset
 from transformers import AutoModelForSequenceClassification, AutoTokenizer, Trainer, TrainingArguments
-from sklearn.metrics import accuracy_score
-from src.config import Config
+from sklearn.preprocessing import LabelEncoder
+from sklearn.metrics import accuracy_score, f1_score
+import torch
+import os
+import sys
 
-def compute_metrics(eval_pred):
-    logits, labels = eval_pred
-    predictions = np.argmax(logits, axis=-1)
-    return {"accuracy": accuracy_score(labels, predictions)}
+# Path hack for config
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+try:
+    from config import Config
+except ImportError:
+    class Config:
+        DATA_PATH = "data/raw/scientific_abstracts_dataset.csv"
+        SEED = 42
 
 def run_contextual_training():
     print("\n--- STARTING PHASE 5: CONTEXTUAL INJECTION TRAINING ---")
     
     # 1. Load the Map
     try:
-        with open(Config.ASSOCIATIVITY_MAP_PATH, "r") as f:
+        with open("data/associativity_map.json", "r") as f:
             assoc_map = json.load(f)
+        print(f"Loaded Associativity Map with {len(assoc_map)} entries.")
     except FileNotFoundError:
         print("Error: Associativity Map not found. Run src/build_associativity.py first.")
         return
 
     # 2. Load Data (Standard Split)
-    # Proactive Fix: Ensure labels are encoded
+    # Ensure consistent split
     df = pd.read_csv(Config.DATA_PATH)
-    dataset = Dataset.from_pandas(df)
-    dataset = dataset.class_encode_column("label")
-    dataset = dataset.train_test_split(test_size=0.2, seed=42)
+    # Encode labels
+    df["label"] = LabelEncoder().fit_transform(df["label"])
+    dataset = Dataset.from_pandas(df).train_test_split(test_size=0.2, seed=Config.SEED)
     
-    tokenizer = AutoTokenizer.from_pretrained("microsoft/deberta-v3-base")
+    model_name = "microsoft/deberta-v3-base"
+    tokenizer = AutoTokenizer.from_pretrained(model_name, use_fast=False)
     
+    def compute_metrics(pred):
+        labels = pred.label_ids
+        preds = pred.predictions.argmax(-1)
+        acc = accuracy_score(labels, preds)
+        return {"accuracy": acc}
+
     # --- THE INNOVATION: Context Injection ---
     def inject_context(examples):
         new_inputs = []
@@ -62,19 +76,21 @@ def run_contextual_training():
 
     print("Injecting domain associations into inputs...")
     tokenized_datasets = dataset.map(inject_context, batched=True)
+    tokenized_datasets = tokenized_datasets.remove_columns(["text"])
     
     # 3. Train DeBERTa (Standard Setup)
-    model = AutoModelForSequenceClassification.from_pretrained("microsoft/deberta-v3-base", num_labels=3)
+    model = AutoModelForSequenceClassification.from_pretrained(model_name, num_labels=3)
     
     args = TrainingArguments(
         output_dir="./models/deberta_context_aware",
         num_train_epochs=5,              # 5 Epochs to ensure it learns to use the hints
         per_device_train_batch_size=8,
         learning_rate=2e-5,
-        eval_strategy="epoch",           # Proactive Fix: eval_strategy
+        evaluation_strategy="epoch",
         save_strategy="epoch",
         load_best_model_at_end=True,
-        report_to="none"
+        report_to="none",
+        fp16=torch.cuda.is_available()
     )
     
     trainer = Trainer(
@@ -82,13 +98,21 @@ def run_contextual_training():
         args=args,
         train_dataset=tokenized_datasets["train"],
         eval_dataset=tokenized_datasets["test"],
-        compute_metrics=compute_metrics  # Proactive Fix: compute_metrics
+        compute_metrics=compute_metrics
     )
     
     trainer.train()
-    trainer.save_model() # Save the best model (loaded at end)
     metrics = trainer.evaluate()
     print(f"\n>>> FINAL CONTEXTUAL RESULT: {metrics['eval_accuracy']:.4f}")
+    
+    # Save Model
+    trainer.save_model("./models/deberta_context_aware")
+    tokenizer.save_pretrained("./models/deberta_context_aware")
+    
+    # Save Metrics
+    if not os.path.exists("results"): os.makedirs("results")
+    with open("results/phase5_context_results.json", "w") as f:
+        json.dump(metrics, f, indent=4)
 
 if __name__ == "__main__":
     run_contextual_training()
