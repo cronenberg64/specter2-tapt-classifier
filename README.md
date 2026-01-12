@@ -40,6 +40,24 @@ Second run showing similar cluster separation patterns.
 
 **Note:** The consistency between both runs demonstrates the robustness of the SetFit contrastive learning approach and validates the reliability of the model's performance metrics.
 
+---
+
+### Model Comparisons
+
+#### SetFit with Different Base Models
+Comparison of SciBERT, BERT-Large, and BERT-base using the SetFit contrastive learning framework.
+
+![SetFit Model Comparison](results/figures/final_comparison.png)
+
+SciBERT (99.52%) significantly outperforms BERT-Large (98.94%) and BERT-base (93.75%), demonstrating the value of domain-specific pre-training.
+
+#### SetFit vs Standard Fine-tuning
+Comparison of standard fine-tuning approaches across different transformer models.
+
+![Fine-tuning Comparison](results/figures/finetuning_comparison.png)
+
+The SetFit contrastive learning approach produces tighter cluster separations compared to traditional fine-tuning methods.
+
 ## Quick Start (Running the Classifier)
 If you only want to run the final classifier verification and training:
 
@@ -57,10 +75,19 @@ If you only want to run the final classifier verification and training:
 ---
 
 ## Dataset Creation (Step-by-Step)
-If you wish to reproduce the dataset augmentation process (Context Injection) from scratch, follow these steps:
+If you wish to reproduce the entire dataset creation process from scratch, follow these steps:
+
+### 0. Collect Raw Data from arXiv (Optional)
+If you need to fetch fresh abstracts from the arXiv API, run the data collection script. This queries arXiv for scientific abstracts across three domains: Bioinformatics, Neuroscience, and Materials Science.
+```bash
+python archive/src/collect_data.py
+```
+*Output: `data/raw/scientific_abstracts_dataset.csv` (~1,037 abstracts)*
+
+> **Note:** The raw dataset is already included in the repository. Only run this step if you want to collect a fresh set of abstracts from arXiv.
 
 ### 1. Build the Associativity Map
-This script analyzes the raw scientific abstracts to find domain-specific keywords and synonyms.
+This script analyzes the raw scientific abstracts to find domain-specific keywords and synonyms using TF-IDF.
 ```bash
 python preprocessing/build_associativity.py
 ```
