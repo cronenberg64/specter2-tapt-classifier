@@ -2,6 +2,8 @@
 
 This repo is made for the completion of the final project for the Artificial Intelligence class. This includes all the past experiments that helped lead me to the final model but was ultimately not used or is of no relevance to the final submission, they are merely for reference and for my personal documentation/tracking.
 
+**[View Final Report (PDF)](JonathanSetiawan_ai_finalreport.pdf)**
+
 ## Results
 
 The model was trained twice to reduce error and both runs produced very similar performance metrics.
